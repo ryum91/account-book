@@ -1,0 +1,40 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.9.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'java'
+}
+
+group = 'com.ryum.accountbook'
+version = '0.0.1'
+sourceCompatibility = '1.8'
+
+ext {
+  springVersion = '2.1.9.RELEASE'
+}
+
+configurations {
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+  compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: rootProject.ext.springVersion
+  compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: rootProject.ext.springVersion
+  compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: rootProject.ext.springVersion
+  compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: rootProject.ext.springVersion
+  testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: rootProject.ext.springVersion
+
+  compile group: 'com.h2database', name: 'h2', version: '1.4.199'
+  compile group: 'org.projectlombok', name: 'lombok', version: '1.18.10'
+  compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
+  compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.4'
+}
