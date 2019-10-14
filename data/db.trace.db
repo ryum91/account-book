@@ -1,0 +1,10 @@
+2019-10-14 22:22:36 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DESC[*] CATEGORY_DTO "; expected "DELETE, DROP, DECLARE, DEALLOCATE"; SQL statement:
+desc category_dto [42001-199]
+2019-10-14 22:41:49 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM CATEGORY 
+
+DELETE FROM[*] CATEGORY WHERE IDX = 0 "; SQL statement:
+SELECT * FROM CATEGORY 
+
+delete from category where idx = 0 [42000-199]
