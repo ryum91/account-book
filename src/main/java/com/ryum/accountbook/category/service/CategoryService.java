@@ -38,9 +38,15 @@ public class CategoryService {
 	public Category insert(Category category) throws HttpStatusException {
 		try {
 			return categoryRepository.save(category);
-			
 		} catch (DataIntegrityViolationException e) {
 			throw new HttpStatusException(HttpStatus.BAD_REQUEST, e);
 		}
+	}
+	
+	public void delete(Category category) throws HttpStatusException {
+		if (null == categoryRepository.findById(category.getIdx()).orElse(null)) {
+			throw new HttpStatusException(HttpStatus.NOT_FOUND, "Index " + category.getIdx() + " could not be found");
+		}
+		categoryRepository.delete(category);
 	}
 }
