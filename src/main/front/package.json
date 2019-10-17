@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "clean": "rimraf ../resources/static",
+    "mv-favicon": "move-cli ../resources/templates/favicon.ico ../resources/static/favicon.ico",
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "npm run clean && vue-cli-service build && npm run mv-favicon",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -19,6 +21,8 @@
     "@vue/cli-plugin-babel": "^4.0.2",
     "@vue/cli-plugin-typescript": "^4.0.2",
     "@vue/cli-service": "^4.0.2",
+    "move-cli": "^1.2.1",
+    "rimraf": "^3.0.0",
     "sass": "^1.19.0",
     "sass-loader": "^8.0.0",
     "typescript": "^3.4.3",
