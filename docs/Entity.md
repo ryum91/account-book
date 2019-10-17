@@ -16,8 +16,8 @@
 	* ParentIdx - 부모 카테고리 인덱스
 
 ## Account ##
-	* 계좌 or 카드
+	* 결제 수단
 	* Idx - 인덱스
 	* Name - 이름
 	* Color - 색상
-	* DefaultPrice - 초기 잔액
+	* InitialBalance - 초기 잔액

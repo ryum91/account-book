@@ -15,4 +15,4 @@ spring:
       path: /console
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update

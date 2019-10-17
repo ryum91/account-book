@@ -12,7 +12,7 @@ import com.ryum.accountbook.category.repository.CategoryRepository;
 import com.ryum.accountbook.common.exception.HttpStatusException;
 
 /**
- * Category Service
+ * 카테고리 Service
  * @author ryum
  */
 @Service
@@ -22,7 +22,7 @@ public class CategoryService {
 	CategoryRepository categoryRepository;
 	
 	/**
-	 * 전체 목록 조회
+	 * 카테고리 전체 목록 조회
 	 * @return
 	 */
 	public List<Category> selectAll() {
@@ -30,23 +30,41 @@ public class CategoryService {
 	}
 	
 	/**
-	 * 추가
+	 * 카테고리 추가
 	 * @param category
 	 * @return
 	 * @throws Exception 
 	 */
 	public Category insert(Category category) throws HttpStatusException {
 		try {
+			if (0 != category.getParentIdx() && !isExist(category.getParentIdx())) {
+				throw new HttpStatusException(HttpStatus.BAD_REQUEST, "Parent index " + category.getParentIdx() + " could not be found");
+			}
 			return categoryRepository.save(category);
 		} catch (DataIntegrityViolationException e) {
 			throw new HttpStatusException(HttpStatus.BAD_REQUEST, e);
 		}
 	}
 	
-	public void delete(Category category) throws HttpStatusException {
-		if (null == categoryRepository.findById(category.getIdx()).orElse(null)) {
-			throw new HttpStatusException(HttpStatus.NOT_FOUND, "Index " + category.getIdx() + " could not be found");
+	/**
+	 * 카테고리 삭제
+	 * @param category
+	 * @throws HttpStatusException
+	 */
+	public void delete(int idx) throws HttpStatusException {
+		if (!isExist(idx)) {
+			throw new HttpStatusException(HttpStatus.NOT_FOUND, "Index " + idx + " could not be found");
 		}
-		categoryRepository.delete(category);
+		categoryRepository.deleteInBatch(categoryRepository.findByParentIdx(idx));
+		categoryRepository.deleteById(idx);
+	}
+	
+	/**
+	 * 카테고리 존재 여부 반환
+	 * @param idx
+	 * @return
+	 */
+	private boolean isExist(Integer idx) {
+		return null != categoryRepository.findById(idx).orElse(null);
 	}
 }

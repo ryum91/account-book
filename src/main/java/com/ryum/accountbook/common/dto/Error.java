@@ -10,25 +10,25 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 에러 DTO
+ * 에러
  * @author ryum
  */
 @Getter @Setter
-public class ErrorDto {
+public class Error {
 
 	private String path;
 	private String error;
 	private int status;
 	private String message;
 	
-	public ErrorDto(HttpServletRequest req, HttpStatusException exception) {
+	public Error(HttpServletRequest req, HttpStatusException exception) {
 		this.path = req.getRequestURI();
 		this.error = exception.getStatus().name();
 		this.status = exception.getStatus().value();
 		this.message = exception.getMessage();
 	}
 	
-	public ErrorDto(HttpServletRequest req, Exception exception) {
+	public Error(HttpServletRequest req, Exception exception) {
 		this(req, new HttpStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception));
 	}
 }
