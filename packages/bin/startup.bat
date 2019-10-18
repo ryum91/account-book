@@ -1,0 +1,1 @@
+java -Dspring.config.location=../conf/application.yml -jar accountbook.jar

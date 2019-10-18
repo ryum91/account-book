@@ -6,7 +6,7 @@ spring:
     static-locations: classpath:/static/
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:./data/db;AUTO_SERVER=true
+    url: jdbc:h2:../data/db;AUTO_SERVER=true
     username: sa
     password: 
   h2:
@@ -17,8 +17,11 @@ spring:
     hibernate:
       ddl-auto: update
 logging:
+  path: ./logs/application.log
+  file:
+    max-size: 1GB
   pattern:
-    console: "[%d{YYYY-MM-dd HH:mm:ss}] [%-5p] [%F:%L] %m%n"
+    file: "[%d{YYYY-MM-dd HH:mm:ss}] [%-5p] [%F:%L] %m%n"
   level:
     root: WARN
     org.springframework: ERROR
