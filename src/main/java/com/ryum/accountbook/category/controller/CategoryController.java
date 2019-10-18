@@ -40,8 +40,29 @@ public class CategoryController {
 	 * @throws Exception 
 	 */
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<?> insert(@RequestBody Category category) throws HttpStatusException {
+	public ResponseEntity<?> insert(@RequestBody(required = false) Category category) throws HttpStatusException {
+		if (null == category) {
+			throw new HttpStatusException(HttpStatus.BAD_REQUEST, "Request body is null");
+		}
 		return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.insert(category));
+	}
+	
+	/**
+	 * 카테고리 수정
+	 * @param category
+	 * @return
+	 * @throws HttpStatusException
+	 */
+	@RequestMapping(value = "/{idx}", method = RequestMethod.PUT)
+	public ResponseEntity<?> update(@PathVariable Integer idx, @RequestBody(required = false) Category category) throws HttpStatusException {
+		if (null == idx) {
+			throw new HttpStatusException(HttpStatus.BAD_REQUEST, "Idx is null");
+		}
+		if (null == category) {
+			throw new HttpStatusException(HttpStatus.BAD_REQUEST, "Category is null");
+		}
+		category.setIdx(idx);
+		return ResponseEntity.status(HttpStatus.OK).body(categoryService.update(category));
 	}
 	
 	/**
@@ -53,7 +74,7 @@ public class CategoryController {
 	@RequestMapping(value = "/{idx}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> delete(@PathVariable Integer idx) throws HttpStatusException {
 		if (null == idx) {
-			throw new HttpStatusException(HttpStatus.BAD_REQUEST, "idx is null");
+			throw new HttpStatusException(HttpStatus.BAD_REQUEST, "Idx is null");
 		}
 		categoryService.delete(idx);
 		return ResponseEntity.status(HttpStatus.OK).build();

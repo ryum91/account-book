@@ -2,6 +2,8 @@ package com.ryum.accountbook.category.dto;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,6 +33,7 @@ public class Category {
 	private int idx;			// 인덱스
 	
 	@Column(name = "unit")
+	@Enumerated(EnumType.STRING)
 	private EnumUnit unit;		// 단위
 	
 	@Column(name = "name")
@@ -38,4 +41,19 @@ public class Category {
 	
 	@Column
 	private int parentIdx;		// 부모 카테고리 인덱스
+	
+	public Category() {
+		super();
+	}
+	
+	public Category(EnumUnit unit, String name) {
+		this.unit = unit;
+		this.name = name;
+	}
+	
+	public Category(EnumUnit unit, String name, int parentIdx) {
+		this(unit, name);
+		this.parentIdx = parentIdx;
+	}
+	
 }
