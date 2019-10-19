@@ -12,6 +12,7 @@ import com.ryum.accountbook.category.dto.Category;
 import com.ryum.accountbook.category.repository.CategoryRepository;
 import com.ryum.accountbook.common.enums.EnumUnit;
 import com.ryum.accountbook.common.exception.HttpStatusException;
+import com.ryum.accountbook.common.interfaces.DefaultCRUD;
 import com.ryum.accountbook.config.enums.EnumConfig;
 import com.ryum.accountbook.config.service.ConfigService;
 
@@ -20,7 +21,7 @@ import com.ryum.accountbook.config.service.ConfigService;
  * @author ryum
  */
 @Service
-public class CategoryService implements InitializingBean {
+public class CategoryService implements DefaultCRUD<Category, Integer>, InitializingBean {
 
 	@Autowired
 	CategoryRepository categoryRepository;
@@ -30,28 +31,23 @@ public class CategoryService implements InitializingBean {
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		if (configService.selectBoolean(EnumConfig.BOOLEAN_INIT_CATEGORY_INSERT)) {
-			initCategoryInsert();
-			configService.insertBoolean(EnumConfig.BOOLEAN_INIT_CATEGORY_INSERT, false);
+		if (configService.selectBoolean(EnumConfig.BOOLEAN_DEFAULT_CATEGORY_INSERT)) {
+			defaultCategoryInsert();
+			configService.insertBoolean(EnumConfig.BOOLEAN_DEFAULT_CATEGORY_INSERT, false);
 		}
 	}
 	
-	/**
-	 * 카테고리 전체 목록 조회
-	 * @return
-	 */
+	@Override
 	public List<Category> selectAll() {
 		return categoryRepository.findAll();
 	}
 	
-	/**
-	 * 카테고리 추가
-	 * @param category
-	 * @return
-	 * @throws Exception 
-	 */
+	@Override
 	public Category insert(Category category) throws HttpStatusException {
 		try {
+			if (0 != category.getIdx()) {
+				throw new HttpStatusException(HttpStatus.BAD_REQUEST, "Index is not null");
+			}
 			if (0 != category.getParentIdx() && !isExist(category.getParentIdx())) {
 				throw new HttpStatusException(HttpStatus.BAD_REQUEST, "Parent index " + category.getParentIdx() + " could not be found");
 			}
@@ -61,11 +57,7 @@ public class CategoryService implements InitializingBean {
 		}
 	}
 	
-	/**
-	 * 카테고리 수정
-	 * @param category
-	 * @throws HttpStatusException
-	 */
+	@Override
 	public Category update(Category category) throws HttpStatusException {
 		if (!isExist(category.getIdx())) {
 			throw new HttpStatusException(HttpStatus.NOT_FOUND, "Index " + category.getIdx() + " could not be found");
@@ -79,12 +71,11 @@ public class CategoryService implements InitializingBean {
 		return categoryRepository.save(category);
 	}
 	
-	/**
-	 * 카테고리 삭제
-	 * @param category
-	 * @throws HttpStatusException
-	 */
-	public void delete(int idx) throws HttpStatusException {
+	@Override
+	public void delete(Integer idx) throws HttpStatusException {
+		if (null == idx) {
+			throw new HttpStatusException(HttpStatus.BAD_REQUEST, "Idx is null");
+		}
 		if (!isExist(idx)) {
 			throw new HttpStatusException(HttpStatus.NOT_FOUND, "Index " + idx + " could not be found");
 		}
@@ -93,7 +84,7 @@ public class CategoryService implements InitializingBean {
 	}
 	
 	/**
-	 * 카테고리 존재 여부 반환
+	 * 인덱스 존재 여부 반환
 	 * @param idx
 	 * @return
 	 */
@@ -102,9 +93,9 @@ public class CategoryService implements InitializingBean {
 	}
 
 	/**
-	 * 카테고리 초기값 추가
+	 * 카테고리 기본값 추가
 	 */
-	private void initCategoryInsert() {
+	public void defaultCategoryInsert() {
 		Category earned = insert(new Category(EnumUnit.PLUS, "근로소득"));
 		insert(new Category(EnumUnit.PLUS, "급여", earned.getIdx()));
 		insert(new Category(EnumUnit.PLUS, "보너스", earned.getIdx()));
@@ -113,16 +104,40 @@ public class CategoryService implements InitializingBean {
 		insert(new Category(EnumUnit.PLUS, "이자", financial.getIdx()));
 		insert(new Category(EnumUnit.PLUS, "배당금", financial.getIdx()));
 		
-		insert(new Category(EnumUnit.MINUS, "식비"));
-		insert(new Category(EnumUnit.MINUS, "교통비"));
+		Category food = insert(new Category(EnumUnit.MINUS, "식비"));
+		insert(new Category(EnumUnit.MINUS, "식사", food.getIdx()));
+		insert(new Category(EnumUnit.MINUS, "후식", food.getIdx()));
+		insert(new Category(EnumUnit.MINUS, "군것질", food.getIdx()));
+		
+		Category transportation = insert(new Category(EnumUnit.MINUS, "교통비"));
+		insert(new Category(EnumUnit.MINUS, "대중교통", transportation.getIdx()));
+		insert(new Category(EnumUnit.MINUS, "택시", transportation.getIdx()));
+		insert(new Category(EnumUnit.MINUS, "장거리경비", transportation.getIdx()));
+		
 		insert(new Category(EnumUnit.MINUS, "쇼핑비"));
 		insert(new Category(EnumUnit.MINUS, "미용비"));
-		insert(new Category(EnumUnit.MINUS, "차량유지비"));
-		insert(new Category(EnumUnit.MINUS, "주거생활비"));
+		
+		Category car = insert(new Category(EnumUnit.MINUS, "차량유지비"));
+		insert(new Category(EnumUnit.MINUS, "유류비", car.getIdx()));
+		insert(new Category(EnumUnit.MINUS, "주차비", car.getIdx()));
+		insert(new Category(EnumUnit.MINUS, "하이패스", car.getIdx()));
+		insert(new Category(EnumUnit.MINUS, "정비/수리", car.getIdx()));
+		
+		Category home = insert(new Category(EnumUnit.MINUS, "주거생활비"));
+		insert(new Category(EnumUnit.MINUS, "관리비", home.getIdx()));
+		insert(new Category(EnumUnit.MINUS, "가스비", home.getIdx()));
+		insert(new Category(EnumUnit.MINUS, "생활세금", home.getIdx()));
+		
 		insert(new Category(EnumUnit.MINUS, "문화생활비"));
 		insert(new Category(EnumUnit.MINUS, "건강관리비"));
-		insert(new Category(EnumUnit.MINUS, "사회생활비"));
-		insert(new Category(EnumUnit.MINUS, "금융보험비"));
+		
+		Category social = insert(new Category(EnumUnit.MINUS, "사회생활비"));
+		insert(new Category(EnumUnit.MINUS, "경조사비", social.getIdx()));
+		
+		Category financialOut = insert(new Category(EnumUnit.MINUS, "금융보험비"));
+		insert(new Category(EnumUnit.MINUS, "수수료", financialOut.getIdx()));
+		insert(new Category(EnumUnit.MINUS, "금융이자", financialOut.getIdx()));
+		
 		insert(new Category(EnumUnit.MINUS, "기타"));
 	}
 	

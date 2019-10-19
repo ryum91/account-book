@@ -6,7 +6,7 @@ package com.ryum.accountbook.config.enums;
  */
 public enum EnumConfig {
 
-	BOOLEAN_INIT_CATEGORY_INSERT(true),				// 초기 데이터 삽입
+	BOOLEAN_DEFAULT_CATEGORY_INSERT(true),				// 카테고리 기본값 삽입
 	;
 	
 	private final String defaultValue;

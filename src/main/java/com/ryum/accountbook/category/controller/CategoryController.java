@@ -73,9 +73,6 @@ public class CategoryController {
 	 */
 	@RequestMapping(value = "/{idx}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> delete(@PathVariable Integer idx) throws HttpStatusException {
-		if (null == idx) {
-			throw new HttpStatusException(HttpStatus.BAD_REQUEST, "Idx is null");
-		}
 		categoryService.delete(idx);
 		return ResponseEntity.status(HttpStatus.OK).build();
 	}

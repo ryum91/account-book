@@ -29,7 +29,7 @@ import lombok.Setter;
 public class Category {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idx;			// 인덱스
 	
 	@Column(name = "unit")

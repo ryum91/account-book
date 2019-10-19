@@ -18,7 +18,7 @@ import lombok.Setter;
 public class Account {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idx;			// 인덱스
 	
 	@Column(unique = true)

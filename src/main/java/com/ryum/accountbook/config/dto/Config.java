@@ -6,6 +6,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ryum.accountbook.config.enums.EnumConfig;
 
 import lombok.Getter;
@@ -43,14 +44,17 @@ public class Config {
 		this(key, Integer.toString(value));
 	}
 
+	@JsonIgnore
 	public boolean getBooleanValue() {
 		return Boolean.parseBoolean(value);
 	}
 	
+	@JsonIgnore
 	public int getIntValue() {
 		return Integer.parseInt(value);
 	}
 	
+	@JsonIgnore
 	public String getStringValue() {
 		return value;
 	}
