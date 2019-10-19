@@ -7,7 +7,7 @@
     "build": "npm run clean && vue-cli-service build && npm run mv-favicon",
     "lint": "vue-cli-service lint",
     "clean": "rimraf ../dist/static",
-    "mv-favicon": "move-cli ../dist/templates/favicon.ico ../dist/static/favicon.ico"
+    "mv-favicon": "move-cli ../dist/public/favicon.ico ../dist/static/favicon.ico"
   },
   "dependencies": {
     "core-js": "^3.1.2",
