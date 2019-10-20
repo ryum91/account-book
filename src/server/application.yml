@@ -16,7 +16,7 @@ spring:
       path: /console
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
 logging:
   pattern:
     console: "[%d{YYYY-MM-dd HH:mm:ss}] [%-5p] [%F:%L] %m%n"

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.ryum.accountbook.account.dto.Account;
 
 /**
- * 결제 수단 Repository
+ * 결제수단 Repository
  * @author ryum
  */
 @Repository

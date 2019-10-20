@@ -10,7 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 결제 수단
+ * 결제수단
  * @author ryum
  */
 @Entity
