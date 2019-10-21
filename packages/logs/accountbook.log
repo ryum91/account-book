@@ -1,0 +1,7 @@
+[2019-10-21 14:21:44] [INFO ] [StartupInfoLogger.java:50] Starting Main on CRPARK-DESKTOP with PID 13388 (C:\Users\crpark\Documents\ryum\account-book\packages\bin\accountbook.jar started by crpark in C:\Users\crpark\Documents\ryum\account-book\packages\bin)
+[2019-10-21 14:21:44] [INFO ] [SpringApplication.java:652] The following profiles are active: prod
+[2019-10-21 14:21:51] [INFO ] [StartupInfoLogger.java:59] Started Main in 7.514 seconds (JVM running for 8.656)
+[2019-10-21 14:21:52] [INFO ] [PageController.java:18] access index
+[2019-10-21 14:21:54] [INFO ] [PageController.java:18] access index
+[2019-10-21 14:21:59] [INFO ] [PageController.java:18] access index
+[2019-10-21 14:22:01] [INFO ] [PageController.java:18] access index

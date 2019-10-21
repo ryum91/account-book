@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: dev
   thymeleaf:    prefix: classpath:/public/
   mvc:
     static-path-pattern: /static/**
@@ -10,17 +12,22 @@ spring:
     url: jdbc:h2:./data/db;AUTO_SERVER=true
     username: sa
     password: 
+  jpa:
+    hibernate:
+      ddl-auto: update
   h2:
     console:
       enabled: true
       path: /console
-  jpa:
-    hibernate:
-      ddl-auto: update
 logging:
-  pattern:
-    console: "[%d{YYYY-MM-dd HH:mm:ss}] [%-5p] [%F:%L] %m%n"
-  level:
-    root: WARN
-    org.springframework: ERROR
-    com.ryum: INFO
+  config: classpath:logback.xml
+  
+---
+
+spring: 
+  profiles: prod
+  datasource:
+    url: jdbc:h2:../data/db 
+  h2:
+    console:
+      enabled: false

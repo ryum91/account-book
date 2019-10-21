@@ -1,1 +1,2 @@
-java -Dspring.config.location=../conf/application.yml -jar accountbook.jar
+@ECHO OFF
+start "accountbook" /MIN java -Dspring.profiles.active=prod -jar accountbook.jar

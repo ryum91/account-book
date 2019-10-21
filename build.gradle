@@ -16,8 +16,10 @@ sourceSets {
   main {
     java {
       srcDir 'src/server'
+    }
+    resources {
       srcDir 'src/dist'
-      srcDir 'src/front'
+      srcDir 'src/conf'
     }
   }
 }
@@ -42,7 +44,9 @@ dependencies {
   compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: rootProject.ext.springVersion
   compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: rootProject.ext.springVersion
   testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: rootProject.ext.springVersion
-
+  
+  compile group: 'org.codehaus.janino', name: 'commons-compiler', version: '3.1.0'
+  compile group: 'org.codehaus.janino', name: 'janino', version: '3.1.0'
   compile group: 'com.h2database', name: 'h2', version: '1.4.199'
   compile group: 'org.projectlombok', name: 'lombok', version: '1.18.10'
   compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
