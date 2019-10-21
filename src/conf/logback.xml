@@ -22,23 +22,18 @@
         </layout>
     </appender>
     
-    <!-- TRACE | DEBUG | INFO | WARN | ERROR -->
- 
- 	<!-- Spring Framework -->
-    <logger name="org.springframework" level="ERROR" />
- 	
- 	<!-- com.ryum -->
-    <logger name="com.ryum" level="WARN" />
-    
-    <!-- ROOT -->
     <if condition='p("spring.profiles.active").equals("prod")'>
     	<then>
+		    <logger name="org.springframework" level="ERROR" />
+		    <logger name="com.ryum" level="WARN" />
 			<root level="WARN">
 		        <appender-ref ref="logfile" />
 		    </root>    	
     	</then>
     	<else>
-			<root level="WARN">
+		    <logger name="org.springframework" level="WARN" />
+		    <logger name="com.ryum" level="INFO" />
+			<root level="INFO">
 		        <appender-ref ref="console" />
 		    </root>    	
     	</else>
