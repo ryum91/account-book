@@ -1,9 +1,7 @@
 package com.ryum.accountbook;
 
 import java.awt.Desktop;
-import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,16 +13,25 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Main {
 
-	private static String URL = "http://127.0.0.1:8080/";
-	
+  public static String URL = "http://127.0.0.1:8080/";
+  public static String env;
+
 	public static void main(String[] args) {
+	  env = System.getProperty("spring.profiles.active");
+	  if (null == env) {
+	    env = "dev";
+	    System.setProperty("spring.profiles.active", env);
+	  }
+	  
 		try {
 			SpringApplication.run(Main.class, args);
 		} catch (Exception e) {
 			System.out.println("The program is already running or conflicts with another program.");
-		} finally {
-			visitUrl(URL);
-			System.out.println("Please visit " + URL);
+		}
+		
+		if (env.equals("prod")) {
+		  visitUrl(URL);
+		  System.out.println("Please visit " + URL);
 		}
 	}
 
@@ -33,20 +40,14 @@ public class Main {
 	 * @param url
 	 */
 	public static void visitUrl(String url) {
-		if (Desktop.isDesktopSupported()) {
-			Desktop desktop = Desktop.getDesktop();
-			try {
-				desktop.browse(new URI(url));
-			} catch (IOException | URISyntaxException e) {
-				e.printStackTrace();
-			}
-		} else {
-			Runtime runtime = Runtime.getRuntime();
-			try {
-				runtime.exec("rundll32 url.dll,FileProtocolHandler " + url);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+	  try {
+	    if (Desktop.isDesktopSupported()) {
+	      Desktop.getDesktop().browse(new URI(url));
+	    } else {
+	      Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + url);
+	    }
+	  } catch (Exception e) {
+	    e.printStackTrace();
+	  }
 	}
 }

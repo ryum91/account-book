@@ -4,14 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.ryum.accountbook.category.dto.Category;
 import com.ryum.accountbook.category.repository.CategoryRepository;
 import com.ryum.accountbook.common.enums.EnumUnit;
-import com.ryum.accountbook.common.exception.HttpStatusException;
 import com.ryum.accountbook.common.interfaces.DefaultCRUD;
 import com.ryum.accountbook.config.enums.EnumConfig;
 import com.ryum.accountbook.config.service.ConfigService;
@@ -43,59 +40,26 @@ public class CategoryService implements DefaultCRUD<Category, Integer>, Initiali
 	}
 	
 	@Override
-	public Category insert(Category category) throws HttpStatusException {
-		try {
-			if (0 != category.getIdx()) {
-				throw new HttpStatusException(HttpStatus.BAD_REQUEST, "Index is not null");
-			}
-			if (0 != category.getParentIdx() && !isExist(category.getParentIdx())) {
-				throw new HttpStatusException(HttpStatus.BAD_REQUEST, "Parent index " + category.getParentIdx() + " could not be found");
-			}
-			return categoryRepository.save(category);
-		} catch (DataIntegrityViolationException e) {
-			throw new HttpStatusException(HttpStatus.BAD_REQUEST, e);
-		}
+	public Category insert(Category category) {
+	  return categoryRepository.save(category);
 	}
 	
 	@Override
-	public Category update(Category category) throws HttpStatusException {
-		if (!isExist(category.getIdx())) {
-			throw new HttpStatusException(HttpStatus.NOT_FOUND, "Index " + category.getIdx() + " could not be found");
-		}
-		if (0 != category.getParentIdx() && !isExist(category.getParentIdx())) {
-			throw new HttpStatusException(HttpStatus.BAD_REQUEST, "Parent index " + category.getParentIdx() + " could not be found");
-		}
-		if (category.getParentIdx() == category.getIdx()) {
-			throw new HttpStatusException(HttpStatus.BAD_REQUEST, "Parent index and category index cannot be the same.");
-		}
+	public Category update(Category category) {
 		return categoryRepository.save(category);
 	}
 	
 	@Override
-	public void delete(Integer idx) throws HttpStatusException {
-		if (null == idx) {
-			throw new HttpStatusException(HttpStatus.BAD_REQUEST, "Idx is null");
-		}
-		if (!isExist(idx)) {
-			throw new HttpStatusException(HttpStatus.NOT_FOUND, "Index " + idx + " could not be found");
-		}
+	public void delete(Integer idx) {
 		categoryRepository.deleteInBatch(categoryRepository.findByParentIdx(idx));
 		categoryRepository.deleteById(idx);
 	}
 	
 	/**
-	 * 인덱스 존재 여부 반환
-	 * @param idx
-	 * @return
-	 */
-	private boolean isExist(Integer idx) {
-		return null != categoryRepository.findById(idx).orElse(null);
-	}
-
-	/**
 	 * 카테고리 기본값 추가
 	 */
 	public void defaultCategoryInsert() {
+	  System.out.println("default category insert");
 		Category earned = insert(new Category(EnumUnit.PLUS, "근로소득"));
 		insert(new Category(EnumUnit.PLUS, "급여", earned.getIdx()));
 		insert(new Category(EnumUnit.PLUS, "보너스", earned.getIdx()));

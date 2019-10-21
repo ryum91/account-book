@@ -19,6 +19,13 @@ spring:
     console:
       enabled: true
       path: /console
+  messages:
+    basename: i18n/message
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: true
 logging:
   config: classpath:logback.xml
   
@@ -30,4 +37,9 @@ spring:
     url: jdbc:h2:../data/db 
   h2:
     console:
+      enabled: false
+  devtools:
+    restart:
+      enabled: false
+    livereload:
       enabled: false

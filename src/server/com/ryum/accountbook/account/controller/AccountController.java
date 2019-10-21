@@ -1,17 +1,19 @@
 package com.ryum.accountbook.account.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ryum.accountbook.account.dto.Account;
 import com.ryum.accountbook.account.service.AccountService;
-import com.ryum.accountbook.common.exception.HttpStatusException;
+import com.ryum.accountbook.common.dto.Response;
 
 /**
  * 결제수단 Controller
@@ -28,52 +30,40 @@ public class AccountController {
 	 * 전체 결제수단 목록 조회
 	 * @return
 	 */
-	@RequestMapping(method = RequestMethod.GET)
+	@GetMapping
 	public ResponseEntity<?> selectAll() {
-		return ResponseEntity.ok(accountService.selectAll());
+		return Response.ok().data(accountService.selectAll()).build();
 	}
 	
 	/**
 	 * 결제수단 추가
 	 * @param account
 	 * @return
-	 * @throws Exception 
 	 */
-	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<?> insert(@RequestBody(required = false) Account account) throws HttpStatusException {
-		if (null == account) {
-			throw new HttpStatusException(HttpStatus.BAD_REQUEST, "Request body is null");
-		}
-		return ResponseEntity.status(HttpStatus.CREATED).body(accountService.insert(account));
+	@PostMapping
+	public ResponseEntity<?> insert(@RequestBody Account account) {
+		return Response.created().data(accountService.insert(account)).build();
 	}
 	
 	/**
 	 * 결제수단 수정
 	 * @param account
 	 * @return
-	 * @throws HttpStatusException
 	 */
-	@RequestMapping(value = "/{idx}", method = RequestMethod.PUT)
-	public ResponseEntity<?> update(@PathVariable Integer idx, @RequestBody(required = false) Account account) throws HttpStatusException {
-		if (null == idx) {
-			throw new HttpStatusException(HttpStatus.BAD_REQUEST, "Idx is null");
-		}
-		if (null == account) {
-			throw new HttpStatusException(HttpStatus.BAD_REQUEST, "account is null");
-		}
+	@PutMapping(value = "/{idx}")
+	public ResponseEntity<?> update(@PathVariable Integer idx, @RequestBody Account account) {
 		account.setIdx(idx);
-		return ResponseEntity.status(HttpStatus.OK).body(accountService.update(account));
+		return Response.ok().data(accountService.update(account)).build();
 	}
 	
 	/**
 	 * 결제수단 삭제
 	 * @param idx
 	 * @return
-	 * @throws HttpStatusException
 	 */
-	@RequestMapping(value = "/{idx}", method = RequestMethod.DELETE)
-	public ResponseEntity<?> delete(@PathVariable Integer idx) throws HttpStatusException {
+	@DeleteMapping(value = "/{idx}")
+	public ResponseEntity<?> delete(@PathVariable Integer idx) {
 		accountService.delete(idx);
-		return ResponseEntity.status(HttpStatus.OK).build();
+		return Response.ok().build();
 	}
 }

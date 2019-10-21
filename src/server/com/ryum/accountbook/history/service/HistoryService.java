@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ryum.accountbook.common.exception.HttpStatusException;
 import com.ryum.accountbook.common.interfaces.DefaultCRUD;
 import com.ryum.accountbook.history.dto.History;
 import com.ryum.accountbook.history.repository.HistoryRepository;
@@ -26,17 +25,17 @@ public class HistoryService implements DefaultCRUD<History, Integer> {
   }
 
   @Override
-  public History insert(History history) throws HttpStatusException {
+  public History insert(History history) {
     return historyRepository.save(history);
   }
 
   @Override
-  public History update(History history) throws HttpStatusException {
+  public History update(History history) {
     return historyRepository.save(history);
   }
 
   @Override
-  public void delete(Integer key) throws HttpStatusException {
+  public void delete(Integer key) {
     historyRepository.deleteById(key);
   }
   

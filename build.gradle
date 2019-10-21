@@ -19,7 +19,7 @@ sourceSets {
     }
     resources {
       srcDir 'src/dist'
-      srcDir 'src/conf'
+      srcDir 'src/resources'
     }
   }
 }
@@ -42,6 +42,7 @@ dependencies {
   compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: rootProject.ext.springVersion
   compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: rootProject.ext.springVersion
   compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: rootProject.ext.springVersion
+  compile group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: rootProject.ext.springVersion
   compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: rootProject.ext.springVersion
   testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: rootProject.ext.springVersion
   

@@ -29,11 +29,11 @@ public class History {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int idx;              // 고유 인덱스
   
-  @Column
+  @Column(nullable = false)
   @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
   private LocalDateTime date;   // 날짜
   
-  @Column
+  @Column(nullable = false)
   @Enumerated(EnumType.STRING)
   private EnumUnit unit;        // 단위
   
@@ -43,7 +43,7 @@ public class History {
   @Column
   private int categoryIdx;      // 카테고리 인덱스
   
-  @Column
+  @Column(nullable = false)
   private String title;         // 타이틀
   
   @Column
