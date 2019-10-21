@@ -1,17 +1,17 @@
-# Function #
+# Function
 
-## Category ##
+## Category
 * 카테고리
 * 수입 및 지출에 대한 카테고리
 * 부모 카테고리 존재 (2 Depth 까지 가능)
 
-## Account ##
+## Account
 * 결제 수단 (카드 or 계좌)
 * 수입 및 지출에 대한 기준점
 * 결제 수단 마다 초기 잔액이 존재
 * 초기 잔액 기준으로 계산
 
-## History ##
+## History
 * 결제 내역
 * 수입 및 지출에 대한 내역
 * 결제 수단 종속
