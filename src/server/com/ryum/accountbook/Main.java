@@ -15,9 +15,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Main {
 
+	private static String URL = "http://127.0.0.1:8080/";
+	
 	public static void main(String[] args) {
-		SpringApplication.run(Main.class, args);
-		visitUrl("http://127.0.0.1:8080");
+		try {
+			SpringApplication.run(Main.class, args);
+		} catch (Exception e) {
+			System.out.println("The program is already running or conflicts with another program.");
+		} finally {
+			visitUrl(URL);
+			System.out.println("Please visit " + URL);
+		}
 	}
 
 	/**

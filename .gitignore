@@ -6,6 +6,7 @@ build/
 *.jar
 node_modules/
 packages/data/
+*.log
 data/
 
 ### STS ###
