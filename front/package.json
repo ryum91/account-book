@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --port 3000",
     "build": "npm run clean && vue-cli-service build && npm run mv-favicon",
     "lint": "vue-cli-service lint",
     "clean": "rimraf ../server/dist/static",
