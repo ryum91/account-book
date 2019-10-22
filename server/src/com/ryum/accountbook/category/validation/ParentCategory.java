@@ -11,14 +11,14 @@ import javax.validation.Payload;
 
 @Documented
 @Constraint(validatedBy = ParentCategoryValidator.class)
-@Target({ElementType.METHOD, ElementType.FIELD})
+@Target({ ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ParentCategory {
 
-  String message() default "Email is Duplication";
+	String message() default "Email is Duplication";
 
-  Class<?>[] groups() default {};
+	Class<?>[] groups() default {};
 
-  Class<? extends Payload>[] payload() default {};
-  
+	Class<? extends Payload>[] payload() default {};
+
 }

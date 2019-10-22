@@ -11,15 +11,15 @@ import com.ryum.accountbook.category.repository.CategoryRepository;
 @Component
 public class ParentCategoryValidator implements ConstraintValidator<ParentCategory, Integer> {
 
-  @Autowired
-  CategoryRepository categoryRepository;
-  
-  @Override
-  public boolean isValid(Integer value, ConstraintValidatorContext context) {
-    if (0 == value) {
-      return true;
-    }
-    return categoryRepository.existsById(value);
-  }
+	@Autowired
+	CategoryRepository categoryRepository;
+
+	@Override
+	public boolean isValid(Integer value, ConstraintValidatorContext context) {
+		if (0 == value) {
+			return true;
+		}
+		return categoryRepository.existsById(value);
+	}
 
 }

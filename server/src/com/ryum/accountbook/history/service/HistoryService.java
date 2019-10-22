@@ -11,32 +11,33 @@ import com.ryum.accountbook.history.repository.HistoryRepository;
 
 /**
  * 결제내역 Service
+ * 
  * @author ryum
  */
 @Service
 public class HistoryService implements DefaultCRUD<History, Integer> {
 
-  @Autowired
-  HistoryRepository historyRepository;
+	@Autowired
+	HistoryRepository historyRepository;
 
-  @Override
-  public List<History> selectAll() {
-    return historyRepository.findAll();
-  }
+	@Override
+	public List<History> selectAll() {
+		return historyRepository.findAll();
+	}
 
-  @Override
-  public History insert(History history) {
-    return historyRepository.save(history);
-  }
+	@Override
+	public History insert(History history) {
+		return historyRepository.save(history);
+	}
 
-  @Override
-  public History update(History history) {
-    return historyRepository.save(history);
-  }
+	@Override
+	public History update(History history) {
+		return historyRepository.save(history);
+	}
 
-  @Override
-  public void delete(Integer key) {
-    historyRepository.deleteById(key);
-  }
-  
+	@Override
+	public void delete(Integer key) {
+		historyRepository.deleteById(key);
+	}
+
 }

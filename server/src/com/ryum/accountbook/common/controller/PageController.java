@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Page Controller
+ * 
  * @author ryum
  */
 @Controller
@@ -14,5 +15,5 @@ public class PageController {
 	public String index() {
 		return "index";
 	}
-	
+
 }

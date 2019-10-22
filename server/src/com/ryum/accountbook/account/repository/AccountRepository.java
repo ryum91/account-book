@@ -7,6 +7,7 @@ import com.ryum.accountbook.account.dto.Account;
 
 /**
  * 결제수단 Repository
+ * 
  * @author ryum
  */
 @Repository

@@ -1,5 +1,8 @@
 package com.ryum.accountbook.category.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,6 +20,7 @@ import com.ryum.accountbook.common.dto.Response;
 
 /**
  * 카테고리 Controller
+ * 
  * @author ryum
  */
 @RestController
@@ -25,28 +29,31 @@ public class CategoryController {
 
 	@Autowired
 	CategoryService categoryService;
-	
+
 	/**
 	 * 전체 카테고리 목록 조회
+	 * 
 	 * @return
 	 */
 	@GetMapping
-	public ResponseEntity<?> selectAll() {
-	  return Response.ok().data(categoryService.selectAll()).build();
+	public ResponseEntity<?> selectAll(HttpServletRequest request, HttpServletResponse response) {
+		return Response.ok().data(categoryService.selectAll()).build();
 	}
-	
+
 	/**
 	 * 카테고리 추가
+	 * 
 	 * @param category
 	 * @return
 	 */
 	@PostMapping
 	public ResponseEntity<?> insert(@RequestBody Category category) {
-	  return Response.created().data(categoryService.insert(category)).build();
+		return Response.created().data(categoryService.insert(category)).build();
 	}
-	
+
 	/**
 	 * 카테고리 수정
+	 * 
 	 * @param category
 	 * @return
 	 */
@@ -55,9 +62,10 @@ public class CategoryController {
 		category.setIdx(idx);
 		return Response.ok().data(categoryService.update(category)).build();
 	}
-	
+
 	/**
 	 * 카테고리 삭제
+	 * 
 	 * @param idx
 	 * @return
 	 */
@@ -66,5 +74,5 @@ public class CategoryController {
 		categoryService.delete(idx);
 		return Response.ok().build();
 	}
-	
+
 }

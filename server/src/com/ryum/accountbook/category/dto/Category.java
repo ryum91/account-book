@@ -17,43 +17,40 @@ import lombok.Setter;
 
 /**
  * 카테고리 DTO
+ * 
  * @author ryum
  */
 @Entity
-@Table(uniqueConstraints = {
-	@UniqueConstraint(
-		columnNames = {"unit", "name"}
-	)
-})
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "unit", "name" }) })
 @Getter @Setter
 public class Category {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idx;			// 인덱스
-	
+	private int idx; // 인덱스
+
 	@Column(name = "unit")
 	@Enumerated(EnumType.STRING)
-	private EnumUnit unit;		// 단위
-	
+	private EnumUnit unit; // 단위
+
 	@Column(name = "name")
-	private String name;		// 카테고리명
-	
+	private String name; // 카테고리명
+
 	@Column
-	private int parentIdx;		// 부모 카테고리 인덱스
-	
+	private int parentIdx; // 부모 카테고리 인덱스
+
 	public Category() {
 		super();
 	}
-	
+
 	public Category(EnumUnit unit, String name) {
 		this.unit = unit;
 		this.name = name;
 	}
-	
+
 	public Category(EnumUnit unit, String name, int parentIdx) {
 		this(unit, name);
 		this.parentIdx = parentIdx;
 	}
-	
+
 }

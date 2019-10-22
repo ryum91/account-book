@@ -17,26 +17,29 @@ import com.ryum.accountbook.common.dto.Response;
 
 /**
  * 결제수단 Controller
+ * 
  * @author ryum
  */
 @RestController
 @RequestMapping("/account")
 public class AccountController {
-	
+
 	@Autowired
 	AccountService accountService;
 
 	/**
 	 * 전체 결제수단 목록 조회
+	 * 
 	 * @return
 	 */
 	@GetMapping
 	public ResponseEntity<?> selectAll() {
 		return Response.ok().data(accountService.selectAll()).build();
 	}
-	
+
 	/**
 	 * 결제수단 추가
+	 * 
 	 * @param account
 	 * @return
 	 */
@@ -44,9 +47,10 @@ public class AccountController {
 	public ResponseEntity<?> insert(@RequestBody Account account) {
 		return Response.created().data(accountService.insert(account)).build();
 	}
-	
+
 	/**
 	 * 결제수단 수정
+	 * 
 	 * @param account
 	 * @return
 	 */
@@ -55,9 +59,10 @@ public class AccountController {
 		account.setIdx(idx);
 		return Response.ok().data(accountService.update(account)).build();
 	}
-	
+
 	/**
 	 * 결제수단 삭제
+	 * 
 	 * @param idx
 	 * @return
 	 */

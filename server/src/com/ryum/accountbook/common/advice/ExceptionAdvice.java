@@ -12,6 +12,7 @@ import com.ryum.accountbook.common.dto.Response;
 
 /**
  * Exception Advice
+ * 
  * @author ryum
  */
 @RestControllerAdvice(annotations = RestController.class)
@@ -21,25 +22,20 @@ public class ExceptionAdvice {
 //	public ResponseEntity<?> httpStatusException(HttpServletRequest req, HttpStatusException exception) {
 //		return ResponseEntity.status(exception.getStatus()).body(new Response(exception.getMessage(), exception.getCodes()));
 //	}
-	
-  @ExceptionHandler(value = {
-                      EmptyResultDataAccessException.class
-                   })
-  public ResponseEntity<?> notFound(Exception e) {
-    return Response.notFound().message(e.getMessage()).build();
-  }
-  
-	@ExceptionHandler(value = {
-	                    HttpMessageNotReadableException.class,
-	                    DataIntegrityViolationException.class
-	                 })
-  public ResponseEntity<?> badRequest(Exception e) {
-	  return Response.badRequest().message(e.getMessage()).build();
+
+	@ExceptionHandler(value = { EmptyResultDataAccessException.class })
+	public ResponseEntity<?> notFound(Exception e) {
+		return Response.notFound().message(e.getMessage()).build();
 	}
-	
+
+	@ExceptionHandler(value = { HttpMessageNotReadableException.class, DataIntegrityViolationException.class })
+	public ResponseEntity<?> badRequest(Exception e) {
+		return Response.badRequest().message(e.getMessage()).build();
+	}
+
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<?> internalServerError(Exception e) {
-	  return Response.internalServerError().message(e.getMessage()).build();
+		return Response.internalServerError().message(e.getMessage()).build();
 	}
-	
+
 }

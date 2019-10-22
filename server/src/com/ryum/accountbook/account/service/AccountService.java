@@ -11,6 +11,7 @@ import com.ryum.accountbook.common.interfaces.DefaultCRUD;
 
 /**
  * 결제수단 Service
+ * 
  * @author ryum
  */
 @Service
@@ -26,7 +27,7 @@ public class AccountService implements DefaultCRUD<Account, Integer> {
 
 	@Override
 	public Account insert(Account account) {
-	  return accountRepository.save(account);
+		return accountRepository.save(account);
 	}
 
 	@Override
@@ -38,5 +39,5 @@ public class AccountService implements DefaultCRUD<Account, Integer> {
 	public void delete(Integer idx) {
 		accountRepository.deleteById(idx);
 	}
-	
+
 }

@@ -8,6 +8,7 @@ import com.ryum.accountbook.config.enums.EnumConfig;
 
 /**
  * 환경설정 Repository
+ * 
  * @author ryum
  */
 @Repository

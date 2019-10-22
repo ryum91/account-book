@@ -7,6 +7,7 @@ import com.ryum.accountbook.history.dto.History;
 
 /**
  * 결제내역 Repository
+ * 
  * @author ryum
  */
 @Repository
