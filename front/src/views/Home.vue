@@ -11,8 +11,14 @@ import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 
 @Component({
   components: {
-    HelloWorld,
-  },
+    HelloWorld
+  }
 })
-export default class Home extends Vue {}
+export default class Home extends Vue {
+  created() {
+    this.$store.dispatch('fetchCategories');
+    const categories = this.$store.getters.categories;
+    console.log('categories', categories);
+  }
+}
 </script>
