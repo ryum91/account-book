@@ -15,11 +15,11 @@ ext {
 sourceSets {
   main {
     java {
-      srcDir 'src/server'
+      srcDir 'src'
     }
     resources {
-      srcDir 'src/dist'
-      srcDir 'src/resources'
+      srcDir 'dist'
+      srcDir 'resources'
     }
   }
 }

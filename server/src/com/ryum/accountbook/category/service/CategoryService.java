@@ -59,7 +59,6 @@ public class CategoryService implements DefaultCRUD<Category, Integer>, Initiali
 	 * 카테고리 기본값 추가
 	 */
 	public void defaultCategoryInsert() {
-	  System.out.println("default category insert");
 		Category earned = insert(new Category(EnumUnit.PLUS, "근로소득"));
 		insert(new Category(EnumUnit.PLUS, "급여", earned.getIdx()));
 		insert(new Category(EnumUnit.PLUS, "보너스", earned.getIdx()));
