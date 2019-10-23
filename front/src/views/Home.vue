@@ -22,7 +22,6 @@ export default class Home extends Vue {
 
   public created() {
     this.$store.dispatch('category/fetchCategories');
-    console.log(this.categories);
   }
 }
 </script>
