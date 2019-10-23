@@ -6,6 +6,8 @@
 </template>
 
 <script lang="ts">
+import { Category } from '@/types';
+import { Getter } from 'vuex-class';
 import { Component, Vue } from 'vue-property-decorator';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 
@@ -15,10 +17,13 @@ import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
   }
 })
 export default class Home extends Vue {
-  created() {
-    this.$store.dispatch('fetchCategories');
-    const categories = this.$store.getters.categories;
-    console.log('categories', categories);
+
+  @Getter('category/categories')
+  categories!: () => Category[]
+
+  public created() {
+    this.$store.dispatch('category/fetchCategories');
+    console.log(this.categories);
   }
 }
 </script>

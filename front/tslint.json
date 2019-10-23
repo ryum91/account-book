@@ -16,6 +16,7 @@
     "object-literal-sort-keys": false,
     "ordered-imports": false,
     "quotemark": [true, "single"],
-    "trailing-comma": [false]
+    "trailing-comma": [false],
+    "no-shadowed-variable": [false]
   }
 }
