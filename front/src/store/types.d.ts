@@ -5,5 +5,5 @@ export interface RootState {
 }
 
 export interface CategoryState {
-  categories: Array<Category>
+  categories: Array<Category>;
 }

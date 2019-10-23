@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <img alt="Vue logo" src="../assets/logo.png" />
+    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
   </div>
 </template>
 
@@ -17,9 +17,8 @@ import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
   }
 })
 export default class Home extends Vue {
-
   @Getter('category/categories')
-  categories!: () => Category[]
+  categories!: () => Category[];
 
   public created() {
     this.$store.dispatch('category/fetchCategories');

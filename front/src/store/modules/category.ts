@@ -20,9 +20,9 @@ const mutations: MutationTree<CategoryState> = {
 };
 
 const actions: ActionTree<CategoryState, RootState> = {
-  async fetchCategories({commit}): Promise<void> {
+  async fetchCategories({ commit }): Promise<void> {
     const data: Category[] = await getCategories();
-    data.forEach((category) => {
+    data.forEach(category => {
       commit('addCategory', category);
     });
   }
