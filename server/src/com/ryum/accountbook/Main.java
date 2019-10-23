@@ -14,8 +14,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Main {
 
-	public static String URL = "http://127.0.0.1:8080/";
-	public static String env;
+	private static String URL = "http://127.0.0.1:8080/";
+	private static String env;
 
 	public static void main(String[] args) {
 		env = System.getProperty("spring.profiles.active");
@@ -41,7 +41,7 @@ public class Main {
 	 * 
 	 * @param url
 	 */
-	public static void visitUrl(String url) {
+	private static void visitUrl(String url) {
 		try {
 			if (Desktop.isDesktopSupported()) {
 				Desktop.getDesktop().browse(new URI(url));
@@ -51,5 +51,13 @@ public class Main {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static boolean isProd() {
+		return "prod".equals(env);
+	}
+	
+	public static boolean isDev() {
+		return "dev".equals(env);
 	}
 }
