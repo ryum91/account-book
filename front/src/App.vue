@@ -1,6 +1,6 @@
 <template>
   <v-app id="sandbox">
-    <v-navigation-drawer clipped mini-variant permanent app overflow></v-navigation-drawer>
+    <v-navigation-drawer clipped mini-variant permanent app overflow />
 
     <v-app-bar clipped-left app>
       <v-toolbar-title>Account Book</v-toolbar-title>
@@ -20,9 +20,10 @@ import { Component, Vue } from 'vue-property-decorator';
 @Component
 export default class App extends Vue {
   public beforeCreate() {
-    this.$store.dispatch('category/load');
-    this.$store.dispatch('account/load');
-    this.$store.dispatch('history/load');
+    const { dispatch } = this.$store;
+    dispatch('category/load');
+    dispatch('account/load');
+    dispatch('history/load');
   }
 }
 </script>

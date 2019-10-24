@@ -12,10 +12,10 @@ import { Component, Vue } from 'vue-property-decorator';
 @Component
 export default class Home extends Vue {
   @Getter('category/findAll')
-  categories!: () => Category[];
+  private categories!: Category[];
 
   public created() {
-    this.$store.dispatch('category/fetchCategories');
+    this.$store.dispatch('category/load');
   }
 }
 </script>

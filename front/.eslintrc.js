@@ -3,12 +3,8 @@ module.exports = {
   env: {
     node: true
   },
-  extends: [
-    'plugin:vue/recommended',
-    '@vue/typescript',
-    '@vue/prettier',
-    'prettier'
-  ],
+  extends: ['plugin:vue/recommended', '@vue/prettier', '@vue/typescript', 'prettier'],
+  plugins: ['vue'],
   parserOptions: {
     parser: '@typescript-eslint/parser'
   },
