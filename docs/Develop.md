@@ -1,3 +1,10 @@
+## VSCode
+* Required Extenstion
+  * ESLint
+  * Prettier - Code formatter
+* Format On Save
+* Auto Fix On Save
+
 ## Vuex
 - state는 직접 접근하지 않는다.
 - state 접근이 필요한 경우 Getter 정의해서 사용
