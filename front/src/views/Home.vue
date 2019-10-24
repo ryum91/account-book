@@ -9,8 +9,9 @@ import { Category } from '@/types';
 import { Getter } from 'vuex-class';
 import { Component, Vue } from 'vue-property-decorator';
 
+@Component
 export default class Home extends Vue {
-  @Getter('category/categories')
+  @Getter('category/findAll')
   categories!: () => Category[];
 
   public created() {

@@ -2,6 +2,8 @@ import Vue from 'vue';
 import Vuex, { StoreOptions } from 'vuex';
 import { RootState } from './types';
 import { category } from './modules/category';
+import { account } from './modules/account';
+import { history } from './modules/history';
 
 Vue.use(Vuex);
 
@@ -10,7 +12,9 @@ const store: StoreOptions<RootState> = {
     version: '0.0.0.1'
   },
   modules: {
-    category
+    category,
+    account,
+    history
   }
 };
 

@@ -12,6 +12,21 @@
   </v-app>
 </template>
 
+<script lang="ts">
+import { Category, History } from '@/types';
+import { Getter } from 'vuex-class';
+import { Component, Vue } from 'vue-property-decorator';
+
+@Component
+export default class App extends Vue {
+  public beforeCreate() {
+    this.$store.dispatch('category/load');
+    this.$store.dispatch('account/load');
+    this.$store.dispatch('history/load');
+  }
+}
+</script>
+
 <style lang="scss">
 html {
   overflow: hidden !important;

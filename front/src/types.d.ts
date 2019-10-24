@@ -1,4 +1,7 @@
-export type Unit = 'PLUS' | 'MINUS';
+export enum Unit {
+  PLUS,
+  MINUS
+}
 
 export interface Category {
   idx: number;

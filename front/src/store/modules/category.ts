@@ -8,23 +8,35 @@ const state: CategoryState = {
 };
 
 const getters: GetterTree<CategoryState, RootState> = {
-  categories(state): Category[] {
+  // Getter declare 'category/findAll'
+  findAll(state): Category[] {
     return state.categories;
+  },
+  // Getter declare 'category/findByIdx'
+  findByIdx(state): Function {
+    return function(idx: number): Category | undefined {
+      return state.categories.find(category => category.idx === idx);
+    };
   }
 };
 
 const mutations: MutationTree<CategoryState> = {
-  addCategory(state, category: Category) {
+  // Mutation declare 'category/clear'
+  clear(state): void {
+    state.categories = [];
+  },
+  // Mutation declare 'category/add'
+  add(state, category: Category): void {
     state.categories.push(category);
   }
 };
 
 const actions: ActionTree<CategoryState, RootState> = {
-  async fetchCategories({ commit }): Promise<void> {
+  // Action declare 'category/load'
+  async load({ commit }): Promise<void> {
     const data: Category[] = await getCategories();
-    data.forEach(category => {
-      commit('addCategory', category);
-    });
+    commit('clear');
+    data.forEach(category => commit('add', category));
   }
 };
 
