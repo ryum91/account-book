@@ -1,6 +1,6 @@
 import { Module, GetterTree, MutationTree, ActionTree } from 'vuex';
 import { RootState, AccountState } from '../types';
-import { Account } from '@/types';
+import { Account } from '@/types/types';
 import { getAccounts } from '@/api';
 
 const state: AccountState = {

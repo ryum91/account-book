@@ -1,4 +1,4 @@
-import { Category, Account, History } from '@/types';
+import { Category, Account, History } from '@/types/types';
 
 export interface RootState {
   version: string;
