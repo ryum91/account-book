@@ -1,19 +1,21 @@
 <template>
   <v-app id="app">
+    <!-- Top Title -->
     <v-app-bar clipped-left app>
       <v-app-bar-nav-icon v-if="!isLargeScreen" @click.stop="isMenuOpen = !isMenuOpen" />
       <v-toolbar-title>Account Book</v-toolbar-title>
     </v-app-bar>
 
+    <!-- Left Menu -->
     <v-navigation-drawer
       v-model="isMenuOpen"
-      :permanent="isLargeScreen"
       :mini-variant="isLargeScreen"
-      width="200px"
+      :permanent="isLargeScreen"
       class="left-menu"
+      width="200px"
+      overflow
       clipped
       app
-      overflow
     >
       <v-list>
         <v-tooltip v-for="menu in menus" :key="menu.title" :disabled="!isLargeScreen" right>
@@ -21,7 +23,7 @@
             <router-link :to="menu.link" tag="li">
               <v-list-item link v-on="on">
                 <v-list-item-icon>
-                  <v-icon large>{{ menu.icon }}</v-icon>
+                  <v-icon>{{ menu.icon }}</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
                   <v-list-item-title v-text="$t(menu.title)"></v-list-item-title>
@@ -34,20 +36,23 @@
       </v-list>
     </v-navigation-drawer>
 
+    <!-- Contents -->
     <v-content>
-      <router-view />
+      <v-container fluid>
+        <router-view />
+      </v-container>
     </v-content>
 
+    <!-- Footer -->
     <v-footer app>
-      <span class="px-4">&copy; {{ new Date().getFullYear() }}</span>
+      <span class="px-4">{{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>
 </template>
 
 <script lang="ts">
-import { Category, History } from '@/types/types';
-import { Getter } from 'vuex-class';
-import { Vue, Component, Watch } from 'vue-property-decorator';
+import { Vue, Component } from 'vue-property-decorator';
+import { Freeze } from '@/plugins/custom-decorator';
 
 interface Menu {
   title: string;
@@ -57,9 +62,23 @@ interface Menu {
 
 @Component
 export default class App extends Vue {
-  isMenuOpen: boolean = true;
-  isLargeScreen: boolean = true;
-  menus: Array<Menu> = [
+  beforeCreate() {
+    const { dispatch } = this.$store;
+    dispatch('category/load');
+    dispatch('account/load');
+    dispatch('history/load');
+  }
+
+  created() {
+    this.onResize();
+    window.addEventListener('resize', () => this.onResize());
+  }
+
+  private isMenuOpen: boolean = true;
+  private isLargeScreen: boolean = true;
+
+  @Freeze()
+  private menus: Array<Menu> = [
     {
       title: 'word.main',
       icon: 'mdi-home',
@@ -82,24 +101,8 @@ export default class App extends Vue {
     }
   ];
 
-  beforeCreate() {
-    const { dispatch } = this.$store;
-    dispatch('category/load');
-    dispatch('account/load');
-    dispatch('history/load');
-  }
-
-  created() {
-    this.onResize();
-    window.addEventListener('resize', () => this.onResize());
-  }
-
-  onResize() {
-    if (window.innerWidth > 600) {
-      this.isLargeScreen = true;
-    } else {
-      this.isLargeScreen = false;
-    }
+  private onResize() {
+    this.isLargeScreen = window.innerWidth > 600;
   }
 }
 </script>
