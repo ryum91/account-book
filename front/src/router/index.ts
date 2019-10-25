@@ -6,23 +6,23 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    name: 'main',
+    name: 'Main',
     component: () => import('../views/Main.vue')
   },
   {
     path: '/list',
-    name: 'list',
+    name: 'List',
     component: () => import('../views/List.vue')
   },
   {
     path: '/calendar',
-    name: 'calendar',
+    name: 'Calendar',
     component: () => import('../views/Calendar.vue')
   },
   {
-    path: '/settings',
-    name: 'settings',
-    component: () => import('../views/Settings.vue')
+    path: '/setting',
+    name: 'Setting',
+    component: () => import('../views/Setting.vue')
   }
 ];
 

@@ -1,20 +1,31 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
 import { getI18n } from '@/api/index';
+import { Lang } from '@/types/enums';
 
 Vue.use(VueI18n);
 
-let messages;
-(async function() {
-  const result = await getI18n('ko');
-  console.log('result', result);
-  messages = result;
-})();
-console.log('123');
+const loadedLanguages: Array<Lang> = [];
 
-const i18n = new VueI18n({
-  locale: 'ko',
-  messages
-});
+const i18n = new VueI18n({});
+
+function setI18nLanguage(lang: Lang) {
+  i18n.locale = lang;
+}
+
+export async function loadLanguage(lang: Lang) {
+  if (i18n.locale === lang) {
+    return setI18nLanguage(lang);
+  }
+  if (loadedLanguages.includes(lang)) {
+    return setI18nLanguage(lang);
+  }
+  const message = await getI18n(lang);
+  i18n.setLocaleMessage(lang, message);
+  loadedLanguages.push(lang);
+  return setI18nLanguage(lang);
+}
+
+loadLanguage(Lang.KO);
 
 export default i18n;

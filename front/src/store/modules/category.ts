@@ -1,6 +1,6 @@
 import { Module, GetterTree, MutationTree, ActionTree } from 'vuex';
 import { RootState, CategoryState } from '../types';
-import { Category } from '@/types';
+import { Category } from '@/types/types';
 import { getCategories } from '@/api';
 
 const state: CategoryState = {

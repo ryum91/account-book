@@ -1,4 +1,5 @@
-import { Category, Account, History, Lang } from '@/types';
+import { Category, Account, History } from '@/types/types';
+import { Lang } from '@/types/enums';
 import axios from 'axios';
 
 const request = axios.create({
@@ -6,7 +7,7 @@ const request = axios.create({
   timeout: 5000
 });
 
-export async function getI18n(lang: string): Promise<any> {
+export async function getI18n(lang: Lang): Promise<any> {
   const response: any = await request.get(`/i18n/${lang}`);
   return response.data;
 }

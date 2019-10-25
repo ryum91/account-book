@@ -1,6 +1,6 @@
 import { Module, GetterTree, MutationTree, ActionTree } from 'vuex';
 import { RootState, HistoryState } from '../types';
-import { History } from '@/types';
+import { History } from '@/types/types';
 import { getHistories } from '@/api';
 
 const state: HistoryState = {

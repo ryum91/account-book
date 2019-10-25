@@ -1,12 +1,4 @@
-export enum Lang {
-  ko,
-  en
-}
-
-export enum Unit {
-  PLUS,
-  MINUS
-}
+import { Unit } from './enums';
 
 export interface Category {
   idx: number;
