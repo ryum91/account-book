@@ -20,6 +20,11 @@ const routes = [
     component: () => import('../views/Calendar.vue')
   },
   {
+    path: '/graph',
+    name: 'Graph',
+    component: () => import('../views/Graph.vue')
+  },
+  {
     path: '/setting',
     name: 'Setting',
     component: () => import('../views/Setting.vue')

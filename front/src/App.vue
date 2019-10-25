@@ -2,23 +2,22 @@
   <v-app id="app">
     <!-- Top Title -->
     <v-app-bar clipped-left app>
-      <v-app-bar-nav-icon v-if="!isLargeScreen" @click.stop="isMenuOpen = !isMenuOpen" />
-      <v-toolbar-title>Account Book</v-toolbar-title>
+      <v-app-bar-nav-icon v-if="screenSize === 1" @click.stop="isMenuOpen = !isMenuOpen" />
+      <v-toolbar-title>{{ $t('app.title') }}</v-toolbar-title>
     </v-app-bar>
 
     <!-- Left Menu -->
     <v-navigation-drawer
       v-model="isMenuOpen"
-      :mini-variant="isLargeScreen"
-      :permanent="isLargeScreen"
+      :mini-variant="screenSize === 2"
+      :permanent="screenSize > 1"
       class="left-menu"
-      width="200px"
-      overflow
+      width="170"
       clipped
       app
     >
       <v-list>
-        <v-tooltip v-for="menu in menus" :key="menu.title" :disabled="!isLargeScreen" right>
+        <v-tooltip v-for="menu in menus" :key="menu.title" :disabled="screenSize !== 2" right>
           <template v-slot:activator="{ on }">
             <router-link :to="menu.link" tag="li">
               <v-list-item link v-on="on">
@@ -39,7 +38,9 @@
     <!-- Contents -->
     <v-content>
       <v-container fluid>
-        <router-view />
+        <transition name="fade" mode="out-in">
+          <router-view />
+        </transition>
       </v-container>
     </v-content>
 
@@ -52,7 +53,6 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import { Freeze } from '@/plugins/custom-decorator';
 
 interface Menu {
   title: string;
@@ -62,22 +62,20 @@ interface Menu {
 
 @Component
 export default class App extends Vue {
-  beforeCreate() {
+  private beforeCreate() {
     const { dispatch } = this.$store;
     dispatch('category/load');
     dispatch('account/load');
     dispatch('history/load');
   }
 
-  created() {
+  private created() {
     this.onResize();
     window.addEventListener('resize', () => this.onResize());
   }
 
   private isMenuOpen: boolean = true;
-  private isLargeScreen: boolean = true;
-
-  @Freeze()
+  private screenSize: number = 0;
   private menus: Array<Menu> = [
     {
       title: 'word.main',
@@ -95,6 +93,11 @@ export default class App extends Vue {
       link: '/calendar'
     },
     {
+      title: 'word.graph',
+      icon: 'mdi-chart-bar',
+      link: '/graph'
+    },
+    {
       title: 'word.setting',
       icon: 'mdi-settings',
       link: '/setting'
@@ -102,16 +105,37 @@ export default class App extends Vue {
   ];
 
   private onResize() {
-    this.isLargeScreen = window.innerWidth > 600;
+    const width = window.innerWidth;
+    if (width >= 1200) {
+      this.screenSize = 3;
+    } else if (width >= 600) {
+      this.screenSize = 2;
+    } else {
+      this.screenSize = 1;
+    }
   }
 }
 </script>
 
 <style lang="scss">
+@import url(http://cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css);
 html {
   overflow: hidden !important;
 }
+.v-application {
+  font-family: 'Nanum Barun Gothic' !important;
+}
 .left-menu li {
   list-style: none;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition-duration: 0.3s;
+  transition-property: opacity;
+  transition-timing-function: ease;
+}
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
 }
 </style>
