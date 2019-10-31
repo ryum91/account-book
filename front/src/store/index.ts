@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex, { StoreOptions } from 'vuex';
 import { RootState } from './types';
+import { common } from './modules/common';
 import { category } from './modules/category';
 import { account } from './modules/account';
 import { history } from './modules/history';
@@ -12,6 +13,7 @@ const store: StoreOptions<RootState> = {
     version: '0.0.0.1'
   },
   modules: {
+    common,
     category,
     account,
     history

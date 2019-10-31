@@ -1,6 +1,6 @@
 import { Category, Account, History } from '@/types/types';
 import { Lang } from '@/types/enums';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 const request = axios.create({
   baseURL: 'http://127.0.0.1:8080',

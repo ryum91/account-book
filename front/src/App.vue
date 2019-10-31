@@ -2,7 +2,10 @@
   <v-app id="app">
     <!-- Top Title -->
     <v-app-bar clipped-left app>
-      <v-app-bar-nav-icon v-if="screenSize === 1" @click.stop="isMenuOpen = !isMenuOpen" />
+      <v-app-bar-nav-icon
+        v-if="screenSize === ScreenSize.XS"
+        @click.stop="isMenuOpen = !isMenuOpen"
+      />
       <v-toolbar-title>{{ $t('app.title') }}</v-toolbar-title>
     </v-app-bar>
 
@@ -52,7 +55,9 @@
 </template>
 
 <script lang="ts">
+import { Getter } from 'vuex-class';
 import { Vue, Component } from 'vue-property-decorator';
+import { ScreenSize } from '@/types/enums';
 
 interface Menu {
   title: string;
@@ -64,19 +69,17 @@ interface Menu {
 export default class App extends Vue {
   private beforeCreate() {
     const { dispatch } = this.$store;
+    dispatch('common/fetchScreenSize');
     dispatch('category/load');
     dispatch('account/load');
     dispatch('history/load');
   }
 
-  private created() {
-    this.onResize();
-    window.addEventListener('resize', () => this.onResize());
-  }
-
+  @Getter('common/screenSize')
+  private screenSize?: ScreenSize;
+  private ScreenSize = ScreenSize;
   private isMenuOpen: boolean = true;
-  private screenSize: number = 0;
-  private menus: Array<Menu> = [
+  private menus: Menu[] = [
     {
       title: 'word.main',
       icon: 'mdi-home',
@@ -103,17 +106,6 @@ export default class App extends Vue {
       link: '/setting'
     }
   ];
-
-  private onResize() {
-    const width = window.innerWidth;
-    if (width >= 1200) {
-      this.screenSize = 3;
-    } else if (width >= 600) {
-      this.screenSize = 2;
-    } else {
-      this.screenSize = 1;
-    }
-  }
 }
 </script>
 

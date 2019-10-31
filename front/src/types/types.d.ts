@@ -1,5 +1,10 @@
 import { Unit } from './enums';
 
+export interface Response<T> {
+  code: number,
+  data: T
+}
+
 export interface Category {
   idx: number;
   unit: Unit;
