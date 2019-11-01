@@ -1,12 +1,11 @@
 spring:
   profiles:
     active: dev
-  thymeleaf:    prefix: classpath:/public/
   mvc:
-    static-path-pattern: /static/**
+    static-path-pattern: /public/**
   resources:
     add-mappings: true 
-    static-locations: classpath:/static/
+    static-locations: classpath:/public/
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:./data/db;AUTO_SERVER=true

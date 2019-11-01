@@ -4,15 +4,12 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --port 3000",
-    "build": "npm run clean && vue-cli-service build && npm run mv-favicon",
+    "build": "npm run clean && vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "clean": "rimraf ../server/dist/static",
-    "mv-favicon": "move-cli ../server/dist/public/favicon.ico ../server/dist/static/favicon.ico"
+    "clean": "rimraf ../server/dist/public"
   },
   "dependencies": {
     "axios": "^0.19.0",
-    "core-js": "^3.3.2",
-    "eslint-config-prettier": "^6.4.0",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
     "vue-i18n": "^8.15.0",
@@ -22,6 +19,7 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
+    "core-js": "^3.3.2",
     "@vue/cli-plugin-babel": "^4.0.0",
     "@vue/cli-plugin-eslint": "^4.0.0",
     "@vue/cli-plugin-router": "^4.0.0",
@@ -31,6 +29,7 @@
     "@vue/eslint-config-prettier": "^5.0.0",
     "@vue/eslint-config-typescript": "^4.0.0",
     "eslint": "^5.16.0",
+    "eslint-config-prettier": "^6.4.0",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-vue": "^5.0.0",
     "move-cli": "^1.2.1",
