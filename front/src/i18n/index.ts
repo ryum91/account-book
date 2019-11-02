@@ -8,8 +8,7 @@ Vue.use(VueI18n);
 const loadedLanguages: Lang[] = [];
 
 const i18n = new VueI18n({
-  // silentTranslationWarn: process.env.NODE_ENV === 'production'
-  silentTranslationWarn: true
+  silentTranslationWarn: process.env.NODE_ENV === 'production'
 });
 
 function setI18nLanguage(lang: Lang) {

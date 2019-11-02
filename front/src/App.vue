@@ -2,10 +2,7 @@
   <v-app id="app">
     <!-- Top Title -->
     <v-app-bar v-if="!isLoading" clipped-left app height="56">
-      <v-app-bar-nav-icon
-        v-if="screenSize === ScreenSize.XS"
-        @click.stop="isMenuOpen = !isMenuOpen"
-      />
+      <v-app-bar-nav-icon v-if="screenSize === 1" @click.stop="isMenuOpen = !isMenuOpen" />
       <v-toolbar-title>{{ $t('app.title') }}</v-toolbar-title>
     </v-app-bar>
 
@@ -78,22 +75,8 @@ interface Menu {
   }
 })
 export default class App extends Vue {
-  public beforeCreate() {
-    const { dispatch } = this.$store;
-    Promise.all([
-      dispatch('common/fetchScreenSize'),
-      dispatch('category/load'),
-      dispatch('account/load'),
-      dispatch('history/load'),
-      loadLanguage(Lang.KO)
-    ]).then(() => {
-      this.isLoading = false;
-    });
-  }
-
   @Getter('common/screenSize')
-  private screenSize?: ScreenSize;
-  private ScreenSize = ScreenSize;
+  private screenSize!: ScreenSize;
   private isLoading: boolean = true;
   private isMenuOpen: boolean = true;
   private menus: Menu[] = [
@@ -123,6 +106,19 @@ export default class App extends Vue {
       link: '/setting'
     }
   ];
+
+  public beforeCreate() {
+    const { dispatch } = this.$store;
+    Promise.all([
+      dispatch('common/fetchScreenSize'),
+      dispatch('category/load'),
+      dispatch('account/load'),
+      dispatch('history/load'),
+      loadLanguage(Lang.KO)
+    ]).then(() => {
+      this.isLoading = false;
+    });
+  }
 }
 </script>
 

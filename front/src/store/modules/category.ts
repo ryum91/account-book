@@ -1,6 +1,7 @@
 import { Module, GetterTree, MutationTree, ActionTree } from 'vuex';
 import { RootState, CategoryState } from '../types';
 import { Category } from '@/types/types';
+import { Unit } from '@/types/enums';
 import { getCategories } from '@/api';
 
 const state: CategoryState = {
@@ -8,13 +9,15 @@ const state: CategoryState = {
 };
 
 const getters: GetterTree<CategoryState, RootState> = {
-  // Getter declare 'category/findAll'
-  findAll(state): Category[] {
-    return state.categories;
+  // Getter declare 'category/findList'
+  findList(state): (unit: Unit) => Category[] {
+    return function(unit) {
+      return state.categories.filter(category => category.unit === unit);
+    };
   },
   // Getter declare 'category/findByIdx'
-  findByIdx(state): Function {
-    return function(idx: number): Category | undefined {
+  findByIdx(state): (idx: number) => Category | undefined {
+    return function(idx) {
       return state.categories.find(category => category.idx === idx);
     };
   }

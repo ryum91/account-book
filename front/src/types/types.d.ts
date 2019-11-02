@@ -1,8 +1,8 @@
 import { Unit } from './enums';
 
 export interface Response<T> {
-  code: number,
-  data: T
+  code: number;
+  data: T;
 }
 
 export interface Category {

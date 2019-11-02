@@ -6,11 +6,11 @@
           <v-card-title>
             <div>
               <v-icon dense class="mr-2">{{ item.icon }}</v-icon>
-              <span>{{ item.title }}</span>
+              <span>{{ $t(item.title) }}</span>
             </div>
           </v-card-title>
           <v-card-subtitle>
-            <div>{{ item.description }}</div>
+            <div>{{ $t(item.description) }}</div>
           </v-card-subtitle>
         </v-card>
       </v-col>
@@ -35,24 +35,20 @@ export default class Setting extends Vue {
   private items: Item[] = [
     {
       icon: 'mdi-application-import',
-      title: '수입 카테고리 설정',
-      description: '수입 내역 카테고리를 관리합니다.',
+      title: 'word.category_setting_PLUS',
+      description: 'message.category.description_PLUS',
       link: {
         name: 'setting/category/in'
       }
     },
     {
       icon: 'mdi-application-export',
-      title: '지출 카테고리 설정',
-      description: '지출 내역 카테고리를 관리합니다.',
+      title: 'word.category_setting_MINUS',
+      description: 'message.category.description_MINUS',
       link: {
         name: 'setting/category/out'
       }
     }
   ];
-
-  public beforeCreate() {
-    console.log('setting created');
-  }
 }
 </script>
