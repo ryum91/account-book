@@ -8,7 +8,8 @@ Vue.use(VueI18n);
 const loadedLanguages: Lang[] = [];
 
 const i18n = new VueI18n({
-  silentTranslationWarn: process.env.NODE_ENV === 'production'
+  // silentTranslationWarn: process.env.NODE_ENV === 'production'
+  silentTranslationWarn: true
 });
 
 function setI18nLanguage(lang: Lang) {
@@ -27,7 +28,5 @@ export async function loadLanguage(lang: Lang) {
   loadedLanguages.push(lang);
   return setI18nLanguage(lang);
 }
-
-loadLanguage(Lang.KO);
 
 export default i18n;

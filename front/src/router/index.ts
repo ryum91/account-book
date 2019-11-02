@@ -1,33 +1,56 @@
 import Vue from 'vue';
-import VueRouter from 'vue-router';
+import VueRouter, { RouteConfig } from 'vue-router';
 
 Vue.use(VueRouter);
 
-const routes = [
+const routes: RouteConfig[] = [
   {
+    name: 'main',
     path: '/',
-    name: 'Main',
     component: () => import('../views/Main.vue')
   },
   {
+    name: 'list',
     path: '/list',
-    name: 'List',
     component: () => import('../views/List.vue')
   },
   {
+    name: 'calendar',
     path: '/calendar',
-    name: 'Calendar',
     component: () => import('../views/Calendar.vue')
   },
   {
+    name: 'graph',
     path: '/graph',
-    name: 'Graph',
     component: () => import('../views/Graph.vue')
   },
   {
+    name: 'setting',
     path: '/setting',
-    name: 'Setting',
-    component: () => import('../views/Setting.vue')
+    component: () => import('../views/settings/Setting.vue'),
+    children: [
+      {
+        name: 'setting/category/in',
+        path: 'category/in',
+        component: () => import('../views/settings/Category.vue'),
+        props: {
+          flag: 'in'
+        }
+      },
+      {
+        name: 'setting/category/out',
+        path: 'category/out',
+        component: () => import('../views/settings/Category.vue'),
+        props: {
+          flag: 'out'
+        }
+      }
+    ]
+  },
+  {
+    name: 'notfound',
+    path: '*',
+    component: () => import('../views/Main.vue')
   }
 ];
 

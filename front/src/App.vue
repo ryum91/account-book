@@ -1,7 +1,7 @@
 <template>
   <v-app id="app">
     <!-- Top Title -->
-    <v-app-bar clipped-left app>
+    <v-app-bar v-if="!isLoading" clipped-left app height="56">
       <v-app-bar-nav-icon
         v-if="screenSize === ScreenSize.XS"
         @click.stop="isMenuOpen = !isMenuOpen"
@@ -11,6 +11,7 @@
 
     <!-- Left Menu -->
     <v-navigation-drawer
+      v-if="!isLoading"
       v-model="isMenuOpen"
       :mini-variant="screenSize === 2"
       :permanent="screenSize > 1"
@@ -39,7 +40,7 @@
     </v-navigation-drawer>
 
     <!-- Contents -->
-    <v-content>
+    <v-content v-if="!isLoading">
       <v-container fluid>
         <transition name="fade" mode="out-in">
           <router-view />
@@ -48,16 +49,22 @@
     </v-content>
 
     <!-- Footer -->
-    <v-footer app>
+    <v-footer v-if="!isLoading" app>
       <span class="px-4">{{ new Date().getFullYear() }}</span>
     </v-footer>
+
+    <div v-if="isLoading" class="loading-wrap">
+      <sync-loader :color="'#FFFFFF'" size="20px"></sync-loader>
+    </div>
   </v-app>
 </template>
 
 <script lang="ts">
-import { Getter } from 'vuex-class';
 import { Vue, Component } from 'vue-property-decorator';
-import { ScreenSize } from '@/types/enums';
+import { Getter } from 'vuex-class';
+import { loadLanguage } from './i18n/index';
+import { Lang, ScreenSize } from '@/types/enums';
+import SyncLoader from 'vue-spinner/src/SyncLoader.vue';
 
 interface Menu {
   title: string;
@@ -65,19 +72,29 @@ interface Menu {
   link: string;
 }
 
-@Component
+@Component({
+  components: {
+    SyncLoader
+  }
+})
 export default class App extends Vue {
-  private beforeCreate() {
+  public beforeCreate() {
     const { dispatch } = this.$store;
-    dispatch('common/fetchScreenSize');
-    dispatch('category/load');
-    dispatch('account/load');
-    dispatch('history/load');
+    Promise.all([
+      dispatch('common/fetchScreenSize'),
+      dispatch('category/load'),
+      dispatch('account/load'),
+      dispatch('history/load'),
+      loadLanguage(Lang.KO)
+    ]).then(() => {
+      this.isLoading = false;
+    });
   }
 
   @Getter('common/screenSize')
   private screenSize?: ScreenSize;
   private ScreenSize = ScreenSize;
+  private isLoading: boolean = true;
   private isMenuOpen: boolean = true;
   private menus: Menu[] = [
     {
@@ -112,7 +129,18 @@ export default class App extends Vue {
 <style lang="scss">
 @import url(http://cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css);
 html {
-  overflow: hidden !important;
+  overflow-y: auto !important;
+}
+.loading-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  width: 100%;
+  height: 0;
+  text-align: center;
 }
 .v-application {
   font-family: 'Nanum Barun Gothic' !important;
