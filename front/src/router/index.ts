@@ -34,7 +34,7 @@ const routes: RouteConfig[] = [
         path: 'category/in',
         component: () => import('../views/settings/Category.vue'),
         props: {
-          flag: 'in'
+          unit: 'PLUS'
         }
       },
       {
@@ -42,7 +42,7 @@ const routes: RouteConfig[] = [
         path: 'category/out',
         component: () => import('../views/settings/Category.vue'),
         props: {
-          flag: 'out'
+          unit: 'MINUS'
         }
       }
     ]

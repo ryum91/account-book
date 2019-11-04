@@ -6,17 +6,15 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import Swal from 'sweetalert2';
+import { errorAlert } from '@/helper/alert';
 
 @Component
 export default class Main extends Vue {
   public beforeCreate() {
     const { name: routeName } = this.$route;
     if ('notfound' === routeName) {
-      Swal.fire({
-        type: 'error',
+      errorAlert({
         title: '404 Not Found',
-        heightAuto: false,
         text: this.$t('message.error.404').toString()
       }).then(() => {
         this.$router.replace('/');

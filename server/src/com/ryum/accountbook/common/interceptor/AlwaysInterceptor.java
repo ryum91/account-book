@@ -19,6 +19,8 @@ public class AlwaysInterceptor implements HandlerInterceptor {
 			response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE");
 			response.setHeader("Access-Control-Max-Age", "3600");
 			response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me");
+			response.setHeader("SameSite", "None");
+			response.setHeader("Secure", "true");
 		}
 		return HandlerInterceptor.super.preHandle(request, response, handler);
 	}

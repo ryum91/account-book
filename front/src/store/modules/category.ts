@@ -1,11 +1,11 @@
 import { Module, GetterTree, MutationTree, ActionTree } from 'vuex';
 import { RootState, CategoryState } from '../types';
 import { Category } from '@/types/types';
-import { Unit } from '@/types/enums';
+import { Unit } from '@/types/types';
 import { getCategories } from '@/api';
 
 const state: CategoryState = {
-  categories: Array<Category>()
+  categories: []
 };
 
 const getters: GetterTree<CategoryState, RootState> = {
@@ -37,8 +37,8 @@ const mutations: MutationTree<CategoryState> = {
 const actions: ActionTree<CategoryState, RootState> = {
   // Action declare 'category/load'
   async load({ commit }): Promise<void> {
-    const data: Category[] = await getCategories();
     commit('clear');
+    const data: Category[] = await getCategories();
     data.forEach(category => commit('add', category));
   }
 };

@@ -60,7 +60,8 @@
 import { Vue, Component } from 'vue-property-decorator';
 import { Getter } from 'vuex-class';
 import { loadLanguage } from './i18n/index';
-import { Lang, ScreenSize } from '@/types/enums';
+import { Lang } from '@/types/types';
+import { ScreenSize } from '@/types/enums';
 import SyncLoader from 'vue-spinner/src/SyncLoader.vue';
 
 interface Menu {
@@ -114,7 +115,7 @@ export default class App extends Vue {
       dispatch('category/load'),
       dispatch('account/load'),
       dispatch('history/load'),
-      loadLanguage(Lang.KO)
+      loadLanguage('ko')
     ]).then(() => {
       this.isLoading = false;
     });

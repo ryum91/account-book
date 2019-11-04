@@ -4,7 +4,7 @@ import { Account } from '@/types/types';
 import { getAccounts } from '@/api';
 
 const state: AccountState = {
-  accounts: Array<Account>()
+  accounts: []
 };
 
 const getters: GetterTree<AccountState, RootState> = {
@@ -13,8 +13,8 @@ const getters: GetterTree<AccountState, RootState> = {
     return state.accounts;
   },
   // Getter declare 'account/findByIdx'
-  findByIdx(state): Function {
-    return function(idx: number): Account | undefined {
+  findByIdx(state): (idx: number) => Account | undefined {
+    return function(idx) {
       return state.accounts.find(account => account.idx === idx);
     };
   }
@@ -34,8 +34,8 @@ const mutations: MutationTree<AccountState> = {
 const actions: ActionTree<AccountState, RootState> = {
   // Action declare 'account/load'
   async load({ commit }): Promise<void> {
-    const data: Account[] = await getAccounts();
     commit('clear');
+    const data = await getAccounts();
     data.forEach(account => commit('add', account));
   }
 };

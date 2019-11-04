@@ -4,7 +4,7 @@ import { History } from '@/types/types';
 import { getHistories } from '@/api';
 
 const state: HistoryState = {
-  histories: Array<History>()
+  histories: []
 };
 
 const getters: GetterTree<HistoryState, RootState> = {
@@ -13,8 +13,8 @@ const getters: GetterTree<HistoryState, RootState> = {
     return state.histories;
   },
   // Getter declare 'history/findByIdx'
-  findByIdx(state): Function {
-    return function(idx: number): History | undefined {
+  findByIdx(state): (idx: number) => History | undefined {
+    return function(idx) {
       return state.histories.find(history => history.idx === idx);
     };
   }
@@ -34,8 +34,8 @@ const mutations: MutationTree<HistoryState> = {
 const actions: ActionTree<HistoryState, RootState> = {
   // Action declare 'history/load'
   async load({ commit }): Promise<void> {
-    const data: History[] = await getHistories();
     commit('clear');
+    const data: History[] = await getHistories();
     data.forEach(history => commit('add', history));
   }
 };

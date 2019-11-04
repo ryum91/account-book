@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
 import { getI18n } from '@/api/index';
-import { Lang } from '@/types/enums';
+import { Lang } from '@/types/types';
 
 Vue.use(VueI18n);
 

@@ -1,4 +1,6 @@
-import { Unit } from './enums';
+export type Lang = 'ko' | 'en';
+
+export type Unit = 'PLUS' | 'MINUS';
 
 export interface Response<T> {
   code: number;
