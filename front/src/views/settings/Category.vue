@@ -1,40 +1,30 @@
 <template>
   <v-dialog v-model="isOpen" max-width="600" scrollable>
     <v-card>
-      <v-card-title class="headline">
+      <v-card-title class="headline category-dialog-title">
         <v-icon v-if="unit === 'PLUS'" dense class="mr-2">mdi-application-import</v-icon>
         <v-icon v-if="unit === 'MINUS'" dense class="mr-2">mdi-application-export</v-icon>
         <span>{{ $t(`word.category_setting_${unit}`) }}</span>
       </v-card-title>
       <v-card-text>
-        <v-list-group
-          v-for="category in categories.filter(e => e.parentIdx === 0)"
+        <v-list-item
+          v-for="category in categories"
           :key="category.idx"
-          no-action
+          @click="category.parentIdx === 0 ? onClickItem(category.idx) : null"
         >
-          <template v-slot:activator>
-            <v-list-item-avatar>
-              <v-icon>mdi-silverware-fork-knife</v-icon>
-            </v-list-item-avatar>
-            <v-list-item-content>
-              <v-list-item-title>{{ category.name }}</v-list-item-title>
-              <v-list-item-subtitle>
-                {{ `하위 ${categories.filter(e => e.parentIdx === category.idx).length}개` }}
-              </v-list-item-subtitle>
-            </v-list-item-content>
-          </template>
+          <v-list-item-avatar>
+            <v-icon>{{ category.icon }}</v-icon>
+          </v-list-item-avatar>
+          <v-list-item-content>
+            <v-list-item-title>{{ category.name }}</v-list-item-title>
+          </v-list-item-content>
 
-          <v-list-item
-            v-for="subCategory in categories.filter(e => e.parentIdx === category.idx)"
-            :key="subCategory.idx"
-            link
-          >
-            <v-list-item-avatar>
-              <v-icon>mdi-silverware-fork-knife</v-icon>
-            </v-list-item-avatar>
-            <v-list-item-title>{{ subCategory.name }}</v-list-item-title>
-          </v-list-item>
-        </v-list-group>
+          <v-list-item-action v-if="category.idx !== 0">
+            <v-btn icon @click="onClickMenu($event, category.idx)">
+              <v-icon>mdi-dots-vertical</v-icon>
+            </v-btn>
+          </v-list-item-action>
+        </v-list-item>
       </v-card-text>
     </v-card>
   </v-dialog>
@@ -55,7 +45,7 @@ export default class CategoryComp extends Vue {
   public created() {
     this.unit = this.$attrs.unit as Unit;
     this.isOpen = true;
-    this.categories = this.getCategories(this.unit);
+    this.categories = this.getCategories({ unit: this.unit, parentIdx: 0 });
   }
 
   @Watch('isOpen')
@@ -65,7 +55,23 @@ export default class CategoryComp extends Vue {
     }
   }
 
+  private onClickItem(idx: number) {
+    if (idx === 0) {
+      this.categories = this.getCategories({ unit: this.unit, parentIdx: idx });
+    } else {
+      this.categories = [
+        { idx: 0, icon: 'mdi-folder-upload', name: '...', unit: this.unit, parentIdx: 0 },
+        ...this.getCategories({ unit: this.unit, parentIdx: idx })
+      ];
+    }
+  }
+
+  private onClickMenu(event: MouseEvent, idx: number) {
+    console.log('onClickMenu', idx);
+    event.stopPropagation();
+  }
+
   @Getter('category/findList')
-  private getCategories!: (unit: Unit) => Category[];
+  private getCategories!: ({ unit, parentIdx }: { unit: Unit; parentIdx: number }) => Category[];
 }
 </script>

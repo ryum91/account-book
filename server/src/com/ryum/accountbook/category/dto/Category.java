@@ -35,6 +35,9 @@ public class Category {
 
 	@Column(name = "name")
 	private String name; // 카테고리명
+	
+	@Column
+	private String icon;	// 아이콘
 
 	@Column
 	private int parentIdx; // 부모 카테고리 인덱스
@@ -43,13 +46,14 @@ public class Category {
 		super();
 	}
 
-	public Category(EnumUnit unit, String name) {
+	public Category(EnumUnit unit, String name, String icon) {
 		this.unit = unit;
 		this.name = name;
+		this.icon = icon;
 	}
 
-	public Category(EnumUnit unit, String name, int parentIdx) {
-		this(unit, name);
+	public Category(EnumUnit unit, String name, String icon, int parentIdx) {
+		this(unit, name, icon);
 		this.parentIdx = parentIdx;
 	}
 

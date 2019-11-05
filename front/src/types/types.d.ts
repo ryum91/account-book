@@ -11,6 +11,7 @@ export interface Category {
   idx: number;
   unit: Unit;
   name: string;
+  icon: string;
   parentIdx: number;
 }
 

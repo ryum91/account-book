@@ -10,17 +10,11 @@ const state: CategoryState = {
 
 const getters: GetterTree<CategoryState, RootState> = {
   // Getter declare 'category/findList'
-  findList(state): (unit: Unit) => Category[] {
-    return function(unit) {
-      return state.categories.filter(category => category.unit === unit);
-    };
-  },
+  findList: state => ({ unit, parentIdx }: { unit: Unit; parentIdx: number }) =>
+    state.categories.filter(category => category.unit === unit && category.parentIdx === parentIdx),
+
   // Getter declare 'category/findByIdx'
-  findByIdx(state): (idx: number) => Category | undefined {
-    return function(idx) {
-      return state.categories.find(category => category.idx === idx);
-    };
-  }
+  findByIdx: state => (idx: number) => state.categories.find(category => category.idx === idx)
 };
 
 const mutations: MutationTree<CategoryState> = {
