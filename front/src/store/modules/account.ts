@@ -9,15 +9,9 @@ const state: AccountState = {
 
 const getters: GetterTree<AccountState, RootState> = {
   // Getter declare 'account/findAll'
-  findAll(state): Account[] {
-    return state.accounts;
-  },
+  findAll: state => state.accounts,
   // Getter declare 'account/findByIdx'
-  findByIdx(state): (idx: number) => Account | undefined {
-    return function(idx) {
-      return state.accounts.find(account => account.idx === idx);
-    };
-  }
+  findByIdx: state => (idx: number) => state.accounts.find(account => account.idx === idx)
 };
 
 const mutations: MutationTree<AccountState> = {

@@ -8,22 +8,22 @@ const request = axios.create({
   timeout: 5000
 });
 
-export async function getI18n(lang: Lang) {
+export async function getI18n(lang: Lang): Promise<LocaleMessageObject> {
   const response: AxiosResponse<LocaleMessageObject> = await request.get(`/i18n/${lang}`);
   return response.data;
 }
 
-export async function getCategories() {
+export async function getCategories(): Promise<Category[]> {
   const response: AxiosResponse<Response<Category[]>> = await request.get('/category');
   return response.data.data;
 }
 
-export async function getAccounts() {
+export async function getAccounts(): Promise<Account[]> {
   const response: AxiosResponse<Response<Account[]>> = await request.get('/account');
   return response.data.data;
 }
 
-export async function getHistories() {
+export async function getHistories(): Promise<History[]> {
   const response: AxiosResponse<Response<History[]>> = await request.get('/history');
   return response.data.data;
 }

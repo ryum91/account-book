@@ -15,17 +15,19 @@ function setI18nLanguage(lang: Lang) {
   i18n.locale = lang;
 }
 
-export async function loadLanguage(lang: Lang) {
+export async function loadLanguage(lang: Lang): Promise<void> {
   if (i18n.locale === lang) {
-    return setI18nLanguage(lang);
+    setI18nLanguage(lang);
+    return;
   }
   if (loadedLanguages.includes(lang)) {
-    return setI18nLanguage(lang);
+    setI18nLanguage(lang);
+    return;
   }
   const message = await getI18n(lang);
   i18n.setLocaleMessage(lang, message);
   loadedLanguages.push(lang);
-  return setI18nLanguage(lang);
+  setI18nLanguage(lang);
 }
 
 export default i18n;

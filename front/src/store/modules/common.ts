@@ -8,9 +8,7 @@ const state: CommonState = {
 
 const getters: GetterTree<CommonState, RootState> = {
   // Getter declare 'common/screenSize'
-  screenSize(state): ScreenSize {
-    return state.screenSize;
-  }
+  screenSize: state => state.screenSize
 };
 
 const mutations: MutationTree<CommonState> = {

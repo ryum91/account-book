@@ -9,15 +9,9 @@ const state: HistoryState = {
 
 const getters: GetterTree<HistoryState, RootState> = {
   // Getter declare 'history/findAll'
-  findAll(state): History[] {
-    return state.histories;
-  },
+  findAll: state => state.histories,
   // Getter declare 'history/findByIdx'
-  findByIdx(state): (idx: number) => History | undefined {
-    return function(idx) {
-      return state.histories.find(history => history.idx === idx);
-    };
-  }
+  findByIdx: state => (idx: number) => state.histories.find(history => history.idx === idx)
 };
 
 const mutations: MutationTree<HistoryState> = {
