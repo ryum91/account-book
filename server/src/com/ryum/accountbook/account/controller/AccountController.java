@@ -21,7 +21,7 @@ import com.ryum.accountbook.common.dto.Response;
  * @author ryum
  */
 @RestController
-@RequestMapping("/account")
+@RequestMapping("/api/account")
 public class AccountController {
 
 	@Autowired

@@ -21,7 +21,7 @@ import com.ryum.accountbook.history.service.HistoryService;
  * @author ryum
  */
 @RestController
-@RequestMapping("/history")
+@RequestMapping("/api/history")
 public class HistoryController {
 
 	@Autowired

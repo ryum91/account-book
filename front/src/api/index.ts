@@ -14,16 +14,16 @@ export async function getI18n(lang: Lang): Promise<LocaleMessageObject> {
 }
 
 export async function getCategories(): Promise<Category[]> {
-  const response: AxiosResponse<Response<Category[]>> = await request.get('/category');
+  const response: AxiosResponse<Response<Category[]>> = await request.get('/api/category');
   return response.data.data;
 }
 
 export async function getAccounts(): Promise<Account[]> {
-  const response: AxiosResponse<Response<Account[]>> = await request.get('/account');
+  const response: AxiosResponse<Response<Account[]>> = await request.get('/api/account');
   return response.data.data;
 }
 
 export async function getHistories(): Promise<History[]> {
-  const response: AxiosResponse<Response<History[]>> = await request.get('/history');
+  const response: AxiosResponse<Response<History[]>> = await request.get('/api/history');
   return response.data.data;
 }

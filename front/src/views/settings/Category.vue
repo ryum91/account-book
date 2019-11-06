@@ -74,7 +74,6 @@ export default class CategoryComp extends Vue {
   }
 
   private onClickMenu(event: MouseEvent, idx: number) {
-    console.log('onClickMenu', idx);
     event.stopPropagation();
   }
 

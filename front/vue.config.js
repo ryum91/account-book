@@ -1,7 +1,6 @@
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? '/public/' : '/',
-  outputDir: '../server/dist/public',
-  assetsDir: '',
+  publicPath: process.env.NODE_ENV === 'production' ? '/dist/' : '/',
+  outputDir: '../server/public/dist',
   productionSourceMap: false,
   transpileDependencies: ['vuetify']
 };

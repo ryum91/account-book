@@ -2,10 +2,10 @@ spring:
   profiles:
     active: dev
   mvc:
-    static-path-pattern: /public/**
+    static-path-pattern: /dist/**
   resources:
     add-mappings: true 
-    static-locations: classpath:/public/
+    static-locations: classpath:/dist/
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:./data/db;AUTO_SERVER=true

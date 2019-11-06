@@ -18,7 +18,7 @@ sourceSets {
       srcDir 'src'
     }
     resources {
-      srcDir 'dist'
+      srcDir 'public'
       srcDir 'resources'
     }
   }

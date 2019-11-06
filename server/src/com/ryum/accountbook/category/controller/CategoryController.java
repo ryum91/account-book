@@ -24,7 +24,7 @@ import com.ryum.accountbook.common.dto.Response;
  * @author ryum
  */
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/api/category")
 public class CategoryController {
 
 	@Autowired
