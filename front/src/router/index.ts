@@ -30,6 +30,11 @@ const routes: RouteConfig[] = [
     component: () => import('../views/settings/Setting.vue'),
     children: [
       {
+        name: 'setting/account',
+        path: 'account',
+        component: () => import('../views/settings/Account.vue')
+      },
+      {
         name: 'setting/category/in',
         path: 'category/in',
         component: () => import('../views/settings/Category.vue'),

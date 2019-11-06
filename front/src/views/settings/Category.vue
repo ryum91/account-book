@@ -5,6 +5,9 @@
         <v-icon v-if="unit === 'PLUS'" dense class="mr-2">mdi-application-import</v-icon>
         <v-icon v-if="unit === 'MINUS'" dense class="mr-2">mdi-application-export</v-icon>
         <span>{{ $t(`word.category_setting_${unit}`) }}</span>
+        <v-btn icon class="close-button" @click="isOpen = false">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
       </v-card-title>
       <v-card-text>
         <v-list-item
@@ -56,14 +59,18 @@ export default class CategoryComp extends Vue {
   }
 
   private onClickItem(idx: number) {
-    if (idx === 0) {
-      this.categories = this.getCategories({ unit: this.unit, parentIdx: idx });
-    } else {
-      this.categories = [
-        { idx: 0, icon: 'mdi-folder-upload', name: '...', unit: this.unit, parentIdx: 0 },
-        ...this.getCategories({ unit: this.unit, parentIdx: idx })
-      ];
+    const categories: Category[] = [];
+    if (idx !== 0) {
+      categories.push({
+        idx: 0,
+        icon: 'mdi-folder-upload',
+        name: '...',
+        unit: this.unit,
+        parentIdx: 0
+      });
     }
+    categories.push(...this.getCategories({ unit: this.unit, parentIdx: idx }));
+    this.categories = categories;
   }
 
   private onClickMenu(event: MouseEvent, idx: number) {
@@ -75,3 +82,10 @@ export default class CategoryComp extends Vue {
   private getCategories!: ({ unit, parentIdx }: { unit: Unit; parentIdx: number }) => Category[];
 }
 </script>
+
+<style lang="scss" scoped>
+.close-button {
+  position: absolute;
+  right: 10px;
+}
+</style>

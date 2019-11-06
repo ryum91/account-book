@@ -34,6 +34,14 @@ interface Item {
 export default class Setting extends Vue {
   private items: Item[] = [
     {
+      icon: 'mdi-application',
+      title: '결제 수단 설정',
+      description: '결제 수단을 관리합니다.',
+      link: {
+        name: 'setting/account'
+      }
+    },
+    {
       icon: 'mdi-application-import',
       title: 'word.category_setting_PLUS',
       description: 'message.category.description_PLUS',
