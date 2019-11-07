@@ -1,7 +1,7 @@
-import { Module, GetterTree, MutationTree, ActionTree } from 'vuex';
-import { RootState, HistoryState } from '../types';
 import { History } from '@/types/types';
 import { getHistories } from '@/api';
+import { Module, GetterTree, MutationTree, ActionTree } from 'vuex';
+import { RootState, HistoryState } from '../types';
 
 const state: HistoryState = {
   histories: []
@@ -34,10 +34,12 @@ const actions: ActionTree<HistoryState, RootState> = {
   }
 };
 
-export const history: Module<HistoryState, RootState> = {
+const history: Module<HistoryState, RootState> = {
   namespaced: true,
   state,
   getters,
   mutations,
   actions
 };
+
+export default history;

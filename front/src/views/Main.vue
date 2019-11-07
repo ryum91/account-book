@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import { errorAlert } from '@/helper/alert';
+import errorAlert from '@/helper/alert';
 
 @Component
 export default class Main extends Vue {

@@ -1,6 +1,6 @@
 import { Module, GetterTree, MutationTree, ActionTree } from 'vuex';
+import ScreenSize from '@/types/enums';
 import { RootState, CommonState } from '../types';
-import { ScreenSize } from '@/types/enums';
 
 const state: CommonState = {
   screenSize: ScreenSize.LG
@@ -38,10 +38,12 @@ const actions: ActionTree<CommonState, RootState> = {
   }
 };
 
-export const common: Module<CommonState, RootState> = {
+const common: Module<CommonState, RootState> = {
   namespaced: true,
   state,
   getters,
   mutations,
   actions
 };
+
+export default common;

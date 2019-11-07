@@ -1,7 +1,7 @@
-import { Module, GetterTree, MutationTree, ActionTree } from 'vuex';
-import { RootState, AccountState } from '../types';
 import { Account } from '@/types/types';
 import { getAccounts } from '@/api';
+import { Module, GetterTree, MutationTree, ActionTree } from 'vuex';
+import { RootState, AccountState } from '../types';
 
 const state: AccountState = {
   accounts: []
@@ -34,10 +34,12 @@ const actions: ActionTree<AccountState, RootState> = {
   }
 };
 
-export const account: Module<AccountState, RootState> = {
+const account: Module<AccountState, RootState> = {
   namespaced: true,
   state,
   getters,
   mutations,
   actions
 };
+
+export default account;

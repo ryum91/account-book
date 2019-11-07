@@ -1,5 +1,5 @@
 import { Category, Account, History } from '@/types/types';
-import { ScreenSize } from '@/types/enums';
+import ScreenSize from '@/types/enums';
 
 export interface RootState {
   version: string;

@@ -59,10 +59,10 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import { Getter } from 'vuex-class';
-import { loadLanguage } from './i18n/index';
 import { Lang } from '@/types/types';
-import { ScreenSize } from '@/types/enums';
+import ScreenSize from '@/types/enums';
 import SyncLoader from 'vue-spinner/src/SyncLoader.vue';
+import { loadLanguage } from './i18n/index';
 
 interface Menu {
   title: string;

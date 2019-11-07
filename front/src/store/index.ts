@@ -1,10 +1,10 @@
 import Vue from 'vue';
 import Vuex, { StoreOptions } from 'vuex';
 import { RootState } from './types';
-import { common } from './modules/common';
-import { category } from './modules/category';
-import { account } from './modules/account';
-import { history } from './modules/history';
+import common from './modules/common';
+import category from './modules/category';
+import account from './modules/account';
+import history from './modules/history';
 
 Vue.use(Vuex);
 

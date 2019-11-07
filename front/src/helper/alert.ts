@@ -4,9 +4,11 @@ const parent = Swal.mixin({
   heightAuto: false
 });
 
-export const errorAlert = (options: SweetAlertOptions): Promise<SweetAlertResult> => {
+const errorAlert = (options: SweetAlertOptions): Promise<SweetAlertResult> => {
   return parent.fire({
     type: 'error',
     ...options
   });
 };
+
+export default errorAlert;

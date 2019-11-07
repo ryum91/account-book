@@ -1,8 +1,7 @@
+import { Category, Unit } from '@/types/types';
+import { getCategories } from '@/api';
 import { Module, GetterTree, MutationTree, ActionTree } from 'vuex';
 import { RootState, CategoryState } from '../types';
-import { Category } from '@/types/types';
-import { Unit } from '@/types/types';
-import { getCategories } from '@/api';
 
 const state: CategoryState = {
   categories: []
@@ -37,10 +36,12 @@ const actions: ActionTree<CategoryState, RootState> = {
   }
 };
 
-export const category: Module<CategoryState, RootState> = {
+const category: Module<CategoryState, RootState> = {
   namespaced: true,
   state,
   getters,
   mutations,
   actions
 };
+
+export default category;

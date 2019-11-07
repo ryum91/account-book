@@ -1,5 +1,4 @@
-import { Response, Category, Account, History } from '@/types/types';
-import { Lang } from '@/types/types';
+import { Response, Category, Account, History, Lang } from '@/types/types';
 import axios, { AxiosResponse } from 'axios';
 import { LocaleMessageObject } from 'vue-i18n';
 

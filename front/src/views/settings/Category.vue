@@ -10,18 +10,13 @@
         </v-btn>
       </v-card-title>
       <v-card-text>
-        <v-list-item
-          v-for="category in categories"
-          :key="category.idx"
-          @click="category.parentIdx === 0 ? onClickItem(category.idx) : null"
-        >
+        <v-list-item v-for="category in categories" :key="category.idx" @click="category.parentIdx === 0 ? onClickItem(category.idx) : null">
           <v-list-item-avatar>
             <v-icon>{{ category.icon }}</v-icon>
           </v-list-item-avatar>
           <v-list-item-content>
             <v-list-item-title>{{ category.name }}</v-list-item-title>
           </v-list-item-content>
-
           <v-list-item-action v-if="category.idx !== 0">
             <v-btn icon @click="onClickMenu($event, category.idx)">
               <v-icon>mdi-dots-vertical</v-icon>
@@ -36,8 +31,7 @@
 <script lang="ts">
 import { Vue, Component, Watch } from 'vue-property-decorator';
 import { Getter } from 'vuex-class';
-import { Category } from '@/types/types';
-import { Unit } from '@/types/types';
+import { Category, Unit } from '@/types/types';
 
 @Component
 export default class CategoryComp extends Vue {
