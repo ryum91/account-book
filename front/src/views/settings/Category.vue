@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="isOpen" max-width="600" scrollable>
     <v-card>
-      <v-card-title class="headline category-dialog-title">
+      <v-card-title class="headline">
         <v-icon v-if="unit === 'PLUS'" dense class="mr-2">mdi-application-import</v-icon>
         <v-icon v-if="unit === 'MINUS'" dense class="mr-2">mdi-application-export</v-icon>
         <span>{{ $t(`word.category_setting_${unit}`) }}</span>
@@ -10,7 +10,7 @@
           <v-icon>mdi-close</v-icon>
         </v-btn>
       </v-card-title>
-      <v-card-text style="height: 500px;">
+      <v-card-text class="category-dialog-body">
         <v-list-item v-for="category in categories" :key="category.idx" @click="category.parentIdx === 0 ? onClickItem(category.idx) : null">
           <v-list-item-avatar>
             <v-icon>{{ category.icon }}</v-icon>
@@ -25,7 +25,7 @@
           </v-list-item-action>
         </v-list-item>
       </v-card-text>
-      <v-card-text style="height: 70px; position: relative">
+      <v-card-text class="category-dialog-footer">
         <v-btn absolute dark fab right small color="pink" class="mt-3">
           <v-icon>mdi-plus</v-icon>
         </v-btn>
@@ -81,3 +81,13 @@ export default class CategoryComp extends Vue {
   private getCategories!: ({ unit, parentIdx }: { unit: Unit; parentIdx: number }) => Category[];
 }
 </script>
+
+<style lang="scss" scoped>
+.category-dialog-body {
+  height: 500px;
+}
+.category-dialog-footer {
+  height: 70px;
+  position: relative;
+}
+</style>
