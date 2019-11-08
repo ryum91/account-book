@@ -5,11 +5,12 @@
         <v-icon v-if="unit === 'PLUS'" dense class="mr-2">mdi-application-import</v-icon>
         <v-icon v-if="unit === 'MINUS'" dense class="mr-2">mdi-application-export</v-icon>
         <span>{{ $t(`word.category_setting_${unit}`) }}</span>
-        <v-btn icon class="close-button" @click="isOpen = false">
+        <v-spacer></v-spacer>
+        <v-btn icon @click="isOpen = false">
           <v-icon>mdi-close</v-icon>
         </v-btn>
       </v-card-title>
-      <v-card-text>
+      <v-card-text style="height: 500px;">
         <v-list-item v-for="category in categories" :key="category.idx" @click="category.parentIdx === 0 ? onClickItem(category.idx) : null">
           <v-list-item-avatar>
             <v-icon>{{ category.icon }}</v-icon>
@@ -23,6 +24,11 @@
             </v-btn>
           </v-list-item-action>
         </v-list-item>
+      </v-card-text>
+      <v-card-text style="height: 70px; position: relative">
+        <v-btn absolute dark fab right small color="pink" class="mt-3">
+          <v-icon>mdi-plus</v-icon>
+        </v-btn>
       </v-card-text>
     </v-card>
   </v-dialog>
@@ -75,10 +81,3 @@ export default class CategoryComp extends Vue {
   private getCategories!: ({ unit, parentIdx }: { unit: Unit; parentIdx: number }) => Category[];
 }
 </script>
-
-<style lang="scss" scoped>
-.close-button {
-  position: absolute;
-  right: 10px;
-}
-</style>
