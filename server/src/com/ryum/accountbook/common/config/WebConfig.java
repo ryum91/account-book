@@ -1,11 +1,12 @@
 package com.ryum.accountbook.common.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import com.ryum.accountbook.common.interceptor.AlwaysInterceptor;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /**
  * 설정 클래스
@@ -13,14 +14,19 @@ import com.ryum.accountbook.common.interceptor.AlwaysInterceptor;
  * @author ryum
  */
 @Configuration
+@EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 
-	@Autowired
-	private AlwaysInterceptor alwaysInterceptor;
-	
 	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(alwaysInterceptor).addPathPatterns("/**");
-	}
+  public void addResourceHandlers(ResourceHandlerRegistry registry) {
+      registry.addResourceHandler("/dist/**").addResourceLocations("classpath:dist/");
+  }
 	
+	@Bean
+  public ViewResolver getViewResolver() {
+      InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+      resolver.setPrefix("/dist/");
+      resolver.setSuffix(".html");
+      return resolver;
+  }
 }

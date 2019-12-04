@@ -15,7 +15,7 @@ export default class Main extends Vue {
     if ('notfound' === routeName) {
       errorAlert({
         title: '404 Not Found',
-        text: this.$t('message.error.404').toString()
+        text: this.$t('error.404').toString()
       }).then(() => {
         this.$router.replace('/');
       });

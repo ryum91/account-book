@@ -18,8 +18,6 @@ spring:
     console:
       enabled: true
       path: /console
-  messages:
-    basename: i18n/message
   devtools:
     restart:
       enabled: true

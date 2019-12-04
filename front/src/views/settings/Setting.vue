@@ -36,7 +36,7 @@ export default class Setting extends Vue {
     {
       icon: 'mdi-application',
       title: 'word.account_setting',
-      description: 'message.account.description',
+      description: 'message.account_description',
       link: {
         name: 'setting/account'
       }
@@ -44,7 +44,7 @@ export default class Setting extends Vue {
     {
       icon: 'mdi-application-import',
       title: 'word.category_setting_PLUS',
-      description: 'message.category.description_PLUS',
+      description: 'message.category_description_PLUS',
       link: {
         name: 'setting/category/in'
       }
@@ -52,7 +52,7 @@ export default class Setting extends Vue {
     {
       icon: 'mdi-application-export',
       title: 'word.category_setting_MINUS',
-      description: 'message.category.description_MINUS',
+      description: 'message.category_description_MINUS',
       link: {
         name: 'setting/category/out'
       }
