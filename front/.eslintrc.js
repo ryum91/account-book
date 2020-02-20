@@ -9,6 +9,8 @@ module.exports = {
     parser: '@typescript-eslint/parser'
   },
   rules: {
+    'import/prefer-default-export': 'off',
+    'class-methods-use-this': 'off',
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   }

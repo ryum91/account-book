@@ -1,22 +1,21 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
-import { Lang } from '@/types/types';
 
 Vue.use(VueI18n);
 
-const loadedLanguages: Lang[] = [];
+const loadedLanguages: Type.Lang[] = [];
 
 const i18n = new VueI18n({
   silentTranslationWarn: process.env.NODE_ENV === 'production'
 });
 
-function setI18nLanguage(lang: Lang): Lang {
+function setI18nLanguage(lang: Type.Lang): Type.Lang {
   i18n.locale = lang;
   document.querySelector('html')!.setAttribute('lang', lang);
   return lang;
 }
 
-export async function loadLanguage(lang: Lang): Promise<Lang> {
+export async function loadLanguage(lang: Type.Lang): Promise<Type.Lang> {
   if (i18n.locale === lang) {
     return setI18nLanguage(lang);
   }

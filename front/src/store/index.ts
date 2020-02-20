@@ -1,23 +1,22 @@
 import Vue from 'vue';
 import Vuex, { StoreOptions } from 'vuex';
-import { RootState } from './types';
-import common from './modules/common';
+import global from './modules/global';
 import category from './modules/category';
 import account from './modules/account';
 import history from './modules/history';
 
 Vue.use(Vuex);
 
-const store: StoreOptions<RootState> = {
+const store: StoreOptions<Store.RootState> = {
   state: {
     version: '0.0.0.1'
   },
   modules: {
-    common,
+    global,
     category,
     account,
     history
   }
 };
 
-export default new Vuex.Store<RootState>(store);
+export default new Vuex.Store<Store.RootState>(store);

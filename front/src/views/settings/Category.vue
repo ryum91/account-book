@@ -37,16 +37,15 @@
 <script lang="ts">
 import { Vue, Component, Watch } from 'vue-property-decorator';
 import { Getter } from 'vuex-class';
-import { Category, Unit } from '@/types/types';
 
 @Component
 export default class CategoryComp extends Vue {
-  private unit!: Unit;
+  private unit!: Type.Unit;
   private isOpen: boolean = true;
-  private categories: Category[] = [];
+  private categories: Type.Category[] = [];
 
   public created() {
-    this.unit = this.$attrs.unit as Unit;
+    this.unit = this.$attrs.unit as Type.Unit;
     this.isOpen = true;
     this.categories = this.getCategories({ unit: this.unit, parentIdx: 0 });
   }
@@ -59,7 +58,8 @@ export default class CategoryComp extends Vue {
   }
 
   private onClickItem(idx: number) {
-    const categories: Category[] = [];
+    const categories: Type.Category[] = [];
+
     if (idx !== 0) {
       categories.push({
         idx: 0,
@@ -78,7 +78,7 @@ export default class CategoryComp extends Vue {
   }
 
   @Getter('category/findList')
-  private getCategories!: ({ unit, parentIdx }: { unit: Unit; parentIdx: number }) => Category[];
+  private getCategories!: ({ unit, parentIdx }: { unit: Type.Unit; parentIdx: number }) => Type.Category[];
 }
 </script>
 

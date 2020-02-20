@@ -12,7 +12,8 @@ import errorAlert from '@/helper/alert';
 export default class Main extends Vue {
   public beforeCreate() {
     const { name: routeName } = this.$route;
-    if ('notfound' === routeName) {
+
+    if (routeName === 'notfound') {
       errorAlert({
         title: '404 Not Found',
         text: this.$t('error.404').toString()

@@ -1,45 +1,44 @@
-import { Account } from '@/types/types';
-import { getAccounts } from '@/api';
 import { Module, GetterTree, MutationTree, ActionTree } from 'vuex';
-import { RootState, AccountState } from '../types';
+import { getAccounts } from '@/api';
 
-const state: AccountState = {
+const storage: Store.AccountState = {
   accounts: []
 };
 
-const getters: GetterTree<AccountState, RootState> = {
+const getterTree: GetterTree<Store.AccountState, Store.RootState> = {
   // Getter declare 'account/findAll'
   findAll: state => state.accounts,
   // Getter declare 'account/findByIdx'
   findByIdx: state => (idx: number) => state.accounts.find(account => account.idx === idx)
 };
 
-const mutations: MutationTree<AccountState> = {
+const mutationTree: MutationTree<Store.AccountState> = {
   // Mutation declare 'account/clear'
   clear(state): void {
     state.accounts = [];
   },
   // Mutation declare 'account/add'
-  add(state, account: Account): void {
+  add(state, account: Type.Account): void {
     state.accounts.push(account);
   }
 };
 
-const actions: ActionTree<AccountState, RootState> = {
+const actionTree: ActionTree<Store.AccountState, Store.RootState> = {
   // Action declare 'account/load'
   async load({ commit }): Promise<void> {
     commit('clear');
     const data = await getAccounts();
+
     data.forEach(account => commit('add', account));
   }
 };
 
-const account: Module<AccountState, RootState> = {
+const account: Module<Store.AccountState, Store.RootState> = {
   namespaced: true,
-  state,
-  getters,
-  mutations,
-  actions
+  state: storage,
+  getters: getterTree,
+  mutations: mutationTree,
+  actions: actionTree
 };
 
 export default account;

@@ -59,10 +59,9 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import { Getter } from 'vuex-class';
-import { Lang } from '@/types/types';
-import ScreenSize from '@/types/enums';
 import SyncLoader from 'vue-spinner/src/SyncLoader.vue';
 import { loadLanguage } from './i18n/index';
+import { ScreenSize } from './constant';
 
 interface Menu {
   title: string;
@@ -76,7 +75,7 @@ interface Menu {
   }
 })
 export default class App extends Vue {
-  @Getter('common/screenSize')
+  @Getter('global/screenSize')
   private screenSize!: ScreenSize;
   private isLoading: boolean = true;
   private isMenuOpen: boolean = true;
@@ -109,14 +108,26 @@ export default class App extends Vue {
   ];
 
   public beforeCreate() {
-    const { dispatch } = this.$store;
-    Promise.all([
-      dispatch('common/fetchScreenSize'),
-      dispatch('category/load'),
-      dispatch('account/load'),
-      dispatch('history/load'),
-      loadLanguage('ko')
-    ]).then(() => {
+    const { dispatch, commit } = this.$store;
+
+    const onResize = () => {
+      const width = window.innerWidth;
+
+      if (width >= 1264) {
+        commit('global/screenSize', ScreenSize.LG);
+      } else if (width >= 960) {
+        commit('global/screenSize', ScreenSize.MD);
+      } else if (width >= 600) {
+        commit('global/screenSize', ScreenSize.SM);
+      } else {
+        commit('global/screenSize', ScreenSize.XS);
+      }
+    };
+
+    onResize();
+    window.addEventListener('resize', onResize);
+
+    Promise.all([dispatch('category/load'), dispatch('account/load'), dispatch('history/load'), loadLanguage('ko')]).then(() => {
       this.isLoading = false;
     });
   }
