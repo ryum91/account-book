@@ -1,5 +1,12 @@
 <template>
-  <div class="calendar">
-    <h1>This is an calendar page</h1>
-  </div>
+  <div></div>
 </template>
+
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
+
+@Component
+export default class Calendar extends Vue {}
+</script>
+
+<style lang="scss"></style>

@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="isOpen" max-width="600" scrollable>
     <v-card>
-      <v-card-title class="headline">
+      <v-card-title class="headline category-dialog-title">
         <v-icon v-if="unit === 'PLUS'" dense class="mr-2">mdi-application-import</v-icon>
         <v-icon v-if="unit === 'MINUS'" dense class="mr-2">mdi-application-export</v-icon>
         <span>{{ $t(`word.category_setting_${unit}`) }}</span>
@@ -83,11 +83,16 @@ export default class CategoryComp extends Vue {
 </script>
 
 <style lang="scss" scoped>
+.category-dialog-title {
+  background-color: #2b2b2b;
+}
 .category-dialog-body {
   height: 500px;
+  background-color: #313131;
 }
 .category-dialog-footer {
   height: 70px;
   position: relative;
+  background-color: #313131;
 }
 </style>
