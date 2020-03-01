@@ -39,7 +39,7 @@ repositories {
 }
 
 dependencies {
-  compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: rootProject.ext.springVersion
+  compile group: 'org.springframework.boot', name: 'spring-boot-starter-webflux', version: rootProject.ext.springVersion
   compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: rootProject.ext.springVersion
   compile group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: rootProject.ext.springVersion
   compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: rootProject.ext.springVersion
